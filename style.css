@@ -1,0 +1,133 @@
+/* Design Variables - Earthy & Calm Palette */
+:root {
+    --bg-primary: #fcfbfa;       /* Soft warm alabaster/cream */
+    --bg-secondary: #f4f1eb;     /* Calm sand/stone accent */
+    --text-main: #2c3531;        /* Deep charcoal with an olive undertone */
+    --text-muted: #606c5a;       /* Muted sage gray */
+    --accent-earth: #8f715b;     /* Warm clay/terracotta */
+    --accent-forest: #3b4d41;    /* Deep forest green for structure/buttons */
+    --accent-light: #d1cbc4;     /* Light earth divider */
+    --transition: all 0.3s ease;
+}
+
+/* Base Setup */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+/* Premium Navigation */
+header {
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--accent-light);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+}
+
+nav h2 {
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: var(--accent-forest);
+    letter-spacing: 1px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+nav a:hover {
+    color: var(--accent-earth);
+}
+
+/* Hero Section */
+#hero {
+    background-color: var(--bg-secondary);
+    padding: 8rem 2rem;
+    text-align: center;
+    border-bottom: 1px solid var(--accent-light);
+}
+
+#hero h1 {
+    font-size: 2.8rem;
+    color: var(--accent-forest);
+    max-width: 800px;
+    margin: 0 auto 1.5rem auto;
+    line-height: 1.2;
+}
+
+#hero p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 2.5rem auto;
+}
+
+#hero a {
+    display: inline-block;
+    background-color: var(--accent-forest);
+    color: var(--bg-primary);
+    padding: 0.8rem 2rem;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+#hero a:hover {
+    background-color: var(--accent-earth);
+    transform: translateY(-2px);
+}
+
+/* Content Sections */
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+}
+
+section {
+    padding: 4rem 0;
+    border-bottom: 1px solid var(--accent-light);
+}
+
+section h2 {
+    font-size: 2rem;
+    color: var(--accent-forest);
+    margin-bottom: 1.5rem;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
