@@ -1,133 +1,163 @@
-/* Design Variables - Earthy & Calm Palette */
+/* --- Brand New Color Palette: Warm Minimalist --- */
 :root {
-    --bg-primary: #fcfbfa;       /* Soft warm alabaster/cream */
-    --bg-secondary: #f4f1eb;     /* Calm sand/stone accent */
-    --text-main: #2c3531;        /* Deep charcoal with an olive undertone */
-    --text-muted: #606c5a;       /* Muted sage gray */
-    --accent-earth: #8f715b;     /* Warm clay/terracotta */
-    --accent-forest: #3b4d41;    /* Deep forest green for structure/buttons */
-    --accent-light: #d1cbc4;     /* Light earth divider */
-    --transition: all 0.3s ease;
+    --bg-main: #f9f6f0;          /* Soft, relaxed linen/sand */
+    --text-primary: #1a231f;     /* Deep charcoal/onyx for readability */
+    --text-muted: #70685c;       /* Muted warm stone for secondary text */
+    --accent-warm: #c47b5c;      /* Smooth terracotta/clay */
+    --accent-soft: #e3dec3;      /* Very soft sage/ochre tint for subtle highlights */
+    --fluid-speed: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Base Setup */
+/* --- Smooth Scrolling & Global Setup --- */
+html {
+    scroll-behavior: smooth; /* This gives you that flowing navigation feel */
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 body {
-    background-color: var(--bg-primary);
-    color: var(--text-main);
-    line-height: 1.6;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    line-height: 1.7;
+    overflow-x: hidden;
 }
 
-/* Premium Navigation */
+/* --- Floating, Relaxed Header --- */
 header {
-    background-color: var(--bg-primary);
-    border-bottom: 1px solid var(--accent-light);
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 100;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    backdrop-filter: blur(8px); /* Blur behind the text for a premium feel */
+    background-color: rgba(249, 246, 240, 0.85); 
 }
 
 nav {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 2rem;
+    padding: 2rem;
 }
 
 nav h2 {
-    font-weight: 600;
-    font-size: 1.3rem;
-    color: var(--accent-forest);
-    letter-spacing: 1px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 nav ul {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: 3rem;
 }
 
 nav a {
     text-decoration: none;
     color: var(--text-muted);
-    font-weight: 500;
-    transition: var(--transition);
+    font-size: 0.95rem;
+    font-weight: 400;
+    transition: color var(--fluid-speed);
 }
 
 nav a:hover {
-    color: var(--accent-earth);
+    color: var(--accent-warm);
 }
 
-/* Hero Section */
+/* --- Fluid Content Layout --- */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Big Hero Section */
 #hero {
-    background-color: var(--bg-secondary);
-    padding: 8rem 2rem;
-    text-align: center;
-    border-bottom: 1px solid var(--accent-light);
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 100px;
 }
 
 #hero h1 {
-    font-size: 2.8rem;
-    color: var(--accent-forest);
-    max-width: 800px;
-    margin: 0 auto 1.5rem auto;
-    line-height: 1.2;
+    font-size: clamp(2.5rem, 5vw, 4.5rem); /* Dynamically sizes typography */
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin-bottom: 2rem;
 }
 
 #hero p {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     color: var(--text-muted);
     max-width: 600px;
-    margin: 0 auto 2.5rem auto;
+    margin-bottom: 3rem;
 }
 
-#hero a {
-    display: inline-block;
-    background-color: var(--accent-forest);
-    color: var(--bg-primary);
-    padding: 0.8rem 2rem;
+#hero .cta-link {
+    align-self: flex-start;
+    color: var(--text-primary);
     text-decoration: none;
-    border-radius: 4px;
     font-weight: 500;
-    transition: var(--transition);
+    border-bottom: 2px solid var(--accent-warm);
+    padding-bottom: 4px;
+    transition: opacity var(--fluid-speed);
 }
 
-#hero a:hover {
-    background-color: var(--accent-earth);
-    transform: translateY(-2px);
+#hero .cta-link:hover {
+    opacity: 0.7;
 }
 
-/* Content Sections */
-main {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 4rem 2rem;
+/* --- Relaxed, Flowing Sections --- */
+.flow-section {
+    padding: 10rem 0; /* Massive spacing to let elements breathe */
 }
 
-section {
-    padding: 4rem 0;
-    border-bottom: 1px solid var(--accent-light);
+.flow-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
 }
 
-section h2 {
-    font-size: 2rem;
-    color: var(--accent-forest);
+.section-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent-warm);
     margin-bottom: 1.5rem;
 }
 
-/* Footer */
+.flow-section h2 {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+}
+
+/* Simple list style for free-form content */
+.project-item, .exp-item {
+    margin-bottom: 3rem;
+}
+
+.project-item h3, .exp-item h3 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+/* --- Minimal Footer --- */
 footer {
+    padding: 5rem 0;
+    border-top: 1px solid var(--accent-soft);
     text-align: center;
-    padding: 3rem 2rem;
-    background-color: var(--bg-secondary);
     color: var(--text-muted);
     font-size: 0.9rem;
 }
