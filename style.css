@@ -1,12 +1,39 @@
-/* --- Brand New Color Palette: Warm Minimalist --- */
 :root {
-    --bg-main: #f9f6f0;          /* Soft, relaxed linen/sand */
-    --text-primary: #1a231f;     /* Deep charcoal/onyx for readability */
-    --text-muted: #70685c;       /* Muted warm stone for secondary text */
-    --accent-warm: #c47b5c;      /* Smooth terracotta/clay */
-    --accent-soft: #e3dec3;      /* Very soft sage/ochre tint for subtle highlights */
-    --fluid-speed: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    /* New Modern Tech Palette */
+    --background: #0B0F19;      /* Deep midnight blue/slate background */
+    --text-main: #F3F4F6;       /* Crisp, clean off-white for primary headers */
+    --text-muted: #9CA3AF;      /* Muted steel gray for secondary descriptions */
+    --accent: #06B6D4;          /* Sharp electric cyan for links and accents */
+    --accent-hover: #22D3EE;    /* Lighter cyan shift for active interactions */
+    --card-bg: #111827;         /* Subtle darker card container background */
+    --border-color: #1F2937;    /* Low-contrast geometric border lines */
 }
+
+/* Quick structural sanity checks to apply the new theme variables */
+body {
+    background-color: var(--background);
+    color: var(--text-main);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--accent-hover);
+}
+
+.project-item, .exp-item {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+}/* --- Brand New Color Palette: Warm Minimalist --- */
+
 
 /* --- Smooth Scrolling & Global Setup --- */
 html {
