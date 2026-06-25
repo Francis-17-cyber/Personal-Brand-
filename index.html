@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- INTRO SPLASH SCREEN -->
+<div id="intro-overlay">
+    <div id="intro-content">
+        <span id="intro-word"></span>
+        <span id="intro-name"></span>
+    </div>
+</div>
     <header>
         <nav>
             <h2>Francis Shaba Miyoba</h2>
@@ -140,13 +147,87 @@
         <p>&copy; 2026 Francis Shaba Miyoba.</p>
     </footer>
 
-    <script>
-        const toggleButton = document.getElementById('theme-toggle');
-        const body = document.body;
+   <script>
+    // — Theme Toggle (your original code) —
+    const toggleButton = document.getElementById('theme-toggle');
+    const body = document.body;
+    toggleButton.addEventListener('click', () => {
+        body.classList.toggle('dark-theme');
+    });
 
-        toggleButton.addEventListener('click', () => {
-            body.classList.toggle('dark-theme');
-        });
-    </script>
+    // — Intro Splash Screen —
+    const words = [
+        { text: "Hello",     lang: "English"    },
+        { text: "Hola",      lang: "Spanish"    },
+        { text: "Bonjour",   lang: "French"     },
+        { text: "Ciao",      lang: "Italian"    },
+        { text: "Hallo",     lang: "German"     },
+        { text: "Olá",       lang: "Portuguese" },
+        { text: "مرحبا",     lang: "Arabic"     },
+        { text: "こんにちは", lang: "Japanese"   },
+        { text: "안녕하세요", lang: "Korean"     },
+        { text: "Jambo",     lang: "Swahili"    },
+    ];
+
+    const overlay   = document.getElementById('intro-overlay');
+    const wordEl    = document.getElementById('intro-word');
+    const nameEl    = document.getElementById('intro-name');
+    const fullName  = "Francis Shaba Miyoba";
+
+    let currentIndex = 0;
+
+    // Fades a word in, waits, then fades it out, then moves to next
+    function showNextWord() {
+        if (currentIndex >= words.length) {
+            // All words done — start typing the name
+            wordEl.classList.add('hidden');
+            setTimeout(startTypewriter, 400);
+            return;
+        }
+
+        const word = words[currentIndex];
+        wordEl.textContent = word.text;
+        wordEl.classList.remove('hidden');
+
+        // Hold the word visible for 500ms then fade it out
+        setTimeout(() => {
+            wordEl.classList.add('hidden');
+            currentIndex++;
+            // Wait for fade-out to finish then show next word
+            setTimeout(showNextWord, 350);
+        }, 500);
+    }
+
+    // Types your name one character at a time
+    function startTypewriter() {
+        let i = 0;
+        const speed = 80; // ms per character — increase to slow down
+
+        function typeChar() {
+            if (i < fullName.length) {
+                nameEl.textContent += fullName.charAt(i);
+                i++;
+                setTimeout(typeChar, speed);
+            } else {
+                // Name fully typed — wait then close the overlay
+                setTimeout(closeOverlay, 1200);
+            }
+        }
+
+        typeChar();
+    }
+
+    // Fades out and removes the overlay
+    function closeOverlay() {
+        overlay.classList.add('fade-out');
+        // Wait for CSS fade transition to finish then remove from DOM
+        setTimeout(() => {
+            overlay.remove();
+        }, 800);
+    }
+
+    // Kick everything off
+    showNextWord();
+</script>
 </body>
 </html>
