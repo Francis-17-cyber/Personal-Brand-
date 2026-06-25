@@ -1,17 +1,32 @@
 :root {
-    /* Modern Tech Palette */
-    --background: #0B0F19;       /* Deep midnight blue/slate background */
-    --text-main: #F3F4F6;        /* Crisp, clean off-white for primary headers */
-    --text-muted: #9CA3AF;       /* Muted steel gray for secondary descriptions */
-    --accent: #06B6D4;           /* Sharp electric cyan for links and accents */
-    --accent-hover: #22D3EE;     /* Lighter cyan shift for active interactions */
+    /* ========================================== */
+    /* ☀️ DEFAULT THEME: WARM MINIMALIST (LIGHT)   */
+    /* ========================================== */
+    --background: #F9F6F0;       /* Soft linen/alabaster cream canvas */
+    --nav-bg: rgba(249, 246, 240, 0.85);
+    --text-main: #1C1917;        /* Deep charcoal stone for legibility */
+    --text-muted: #6B7280;       /* Mid-tone slate gray for copy */
+    --accent: #D97706;           /* Warm dark amber/gold accent */
+    --accent-hover: #B45309;
+    --card-bg: #F3F0E9;          /* Slightly deeper card offsets */
+    --border-color: #E7E3DA;     /* Soft warm dividers */
     --accent-orange: #FF4500;    /* Terminal prompt & CTA accent */
     --accent-orange-hover: #E03D00;
-    --card-bg: #111827;          /* Subtle darker card container background */
-    --border-color: #1F2937;     /* Low-contrast geometric border lines */
-    
-    /* Animation Speeds */
-    --fluid-speed: 0.2s;
+    --fluid-speed: 0.25s;
+}
+
+body.dark-theme {
+    /* ========================================== */
+    /* 🌑 TOGGLED THEME: MODERN TECH (DARK)       */
+    /* ========================================== */
+    --background: #0B0F19;       /* Deep midnight blue/slate background */
+    --nav-bg: rgba(11, 15, 25, 0.8);
+    --text-main: #F3F4F6;        /* Crisp, clean off-white for headers */
+    --text-muted: #9CA3AF;       /* Muted steel gray for layouts */
+    --accent: #06B6D4;           /* Sharp electric cyan */
+    --accent-hover: #22D3EE;     
+    --card-bg: #111827;          /* Card container background */
+    --border-color: #1F2937;     /* Geometric gridlines */
 }
 
 /* --- Smooth Scrolling & Global Setup --- */
@@ -23,14 +38,15 @@ html {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 body {
     background-color: var(--background);
     color: var(--text-main);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.7;
     overflow-x: hidden;
+    transition: background-color var(--fluid-speed) ease, color var(--fluid-speed) ease;
 }
 
 a {
@@ -43,7 +59,7 @@ a:hover {
     color: var(--accent-hover);
 }
 
-/* --- Floating, Relaxed Header --- */
+/* --- Floating Header --- */
 header {
     position: fixed;
     top: 0;
@@ -52,8 +68,9 @@ header {
     z-index: 1000;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    background-color: rgba(11, 15, 25, 0.8); /* Reconciled to dark theme background */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: var(--nav-bg);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color var(--fluid-speed) ease, border-color var(--fluid-speed) ease;
 }
 
 nav {
@@ -69,13 +86,13 @@ nav h2 {
     font-size: 1.1rem;
     font-weight: 600;
     letter-spacing: 1px;
-    color: var(--text-main);
 }
 
 nav ul {
     display: flex;
     list-style: none;
     gap: 3rem;
+    align-items: center;
 }
 
 nav a {
@@ -89,6 +106,32 @@ nav a:hover {
     color: var(--accent);
 }
 
+/* --- Lightbulb Toggle Mechanics --- */
+#theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color var(--fluid-speed) ease, transform 0.1s ease;
+}
+
+#theme-toggle:hover {
+    color: var(--accent);
+    transform: scale(1.05);
+}
+
+/* State controls for the SVGs based on .dark-theme class */
+body.dark-theme .bulb-on { display: none; }
+body.dark-theme .bulb-off { display: block; color: var(--text-muted); }
+
+body:not(.dark-theme) .bulb-on { display: block; color: var(--accent); }
+body:not(.dark-theme) .bulb-off { display: none; }
+
+
 /* --- Fluid Content Layout --- */
 .container {
     max-width: 1000px;
@@ -96,7 +139,6 @@ nav a:hover {
     padding: 0 2rem;
 }
 
-/* Big Hero Section */
 #hero {
     min-height: 90vh;
     display: flex;
@@ -118,6 +160,7 @@ nav a:hover {
     color: var(--text-muted);
     max-width: 600px;
     margin-bottom: 3rem;
+    transition: color var(--fluid-speed) ease;
 }
 
 #hero .cta-link {
@@ -126,7 +169,7 @@ nav a:hover {
     font-weight: 500;
     border-bottom: 2px solid var(--accent);
     padding-bottom: 4px;
-    transition: opacity var(--fluid-speed) ease, color var(--fluid-speed) ease;
+    transition: opacity var(--fluid-speed) ease, color var(--fluid-speed) ease, border-color var(--fluid-speed) ease;
 }
 
 #hero .cta-link:hover {
@@ -134,9 +177,33 @@ nav a:hover {
     opacity: 0.9;
 }
 
-/* --- Relaxed, Flowing Sections --- */
+/* --- Reusable Class Text Elements --- */
+.bio-text {
+    color: var(--text-muted); 
+    max-width: 700px; 
+    margin-bottom: 1.5rem; 
+    line-height: 1.6;
+    transition: color var(--fluid-speed) ease;
+}
+.bio-text:last-of-type {
+    margin-bottom: 0;
+}
+
+.desc-main {
+    color: var(--text-muted); 
+    margin-bottom: 1rem;
+    transition: color var(--fluid-speed) ease;
+}
+
+.desc-sub {
+    color: var(--text-muted); 
+    font-size: 0.9rem;
+    transition: color var(--fluid-speed) ease;
+}
+
+/* --- Sections & Cards --- */
 .flow-section {
-    padding: 8rem 0; /* Let elements breathe */
+    padding: 8rem 0;
 }
 
 .flow-grid {
@@ -151,6 +218,7 @@ nav a:hover {
     letter-spacing: 3px;
     color: var(--accent);
     margin-bottom: 1.5rem;
+    transition: color var(--fluid-speed) ease;
 }
 
 .flow-section h2 {
@@ -159,18 +227,16 @@ nav a:hover {
     margin-bottom: 2rem;
 }
 
-/* Grids for Cards */
 .project-item, .exp-item {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     padding: 2rem;
     border-radius: 8px;
-    margin-bottom: 2rem;
-    transition: transform 0.2s ease, border-color 0.2s ease;
+    transition: transform var(--fluid-speed) ease, border-color var(--fluid-speed) ease, background-color var(--fluid-speed) ease;
 }
 
 .project-item:hover, .exp-item:hover {
-    border-color: rgba(6, 182, 212, 0.4); /* Subtle glow effect on hover */
+    border-color: var(--accent);
 }
 
 .project-item h3, .exp-item h3 {
@@ -187,6 +253,7 @@ footer {
     text-align: center;
     color: var(--text-muted);
     font-size: 0.9rem;
+    transition: border-color var(--fluid-speed) ease, color var(--fluid-speed) ease;
 }
 
 /* --- RESUME COMPONENT STYLES --- */
@@ -197,7 +264,6 @@ footer {
     padding: 20px 0;
 }
 
-/* Terminal Header Code */
 .resume-terminal-header {
     margin-bottom: 20px;
 }
@@ -207,16 +273,12 @@ footer {
     font-size: 1.1rem;
     color: var(--text-muted);
     margin-bottom: 8px;
+    transition: color var(--fluid-speed) ease;
 }
 
-.resume-arrow {
+.resume-arrow, .resume-cursor {
     color: var(--accent-orange);
     font-weight: bold;
-}
-
-.resume-cursor {
-    color: var(--accent-orange);
-    animation: resumeBlink 1.1s infinite;
 }
 
 .resume-title {
@@ -225,7 +287,6 @@ footer {
     margin: 0;
 }
 
-/* Controls Bar Layout */
 .resume-controls-bar {
     display: flex;
     justify-content: space-between;
@@ -241,7 +302,6 @@ footer {
     color: var(--text-main);
 }
 
-/* Specific Orange Download Element Button */
 .resume-orange-btn {
     display: inline-flex;
     align-items: center;
@@ -263,15 +323,15 @@ footer {
     transform: scale(0.98);
 }
 
-/* Dark Display Canvas View Window */
 .resume-canvas-frame {
     width: 100%;
     height: 850px;
-    background-color: #111827; /* Updated to match theme card background */
+    background-color: #111827; /* Hard dark contrast canvas stays locked for clear engineering legibility */
     border-radius: 8px;
     overflow: hidden;
     border: 1px solid var(--border-color);
     box-shadow: inset 0 4px 12px rgba(0,0,0,0.4);
+    transition: border-color var(--fluid-speed) ease;
 }
 
 .resume-canvas-frame iframe {
@@ -279,13 +339,11 @@ footer {
     background-color: #111827;
 }
 
-/* Cursor Terminal Effect Animation */
 @keyframes resumeBlink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
 }
 
-/* Mobile Responsive scaling adjustments */
 @media (max-width: 650px) {
     .resume-controls-bar {
         flex-direction: column;

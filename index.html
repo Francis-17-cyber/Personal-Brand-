@@ -15,9 +15,32 @@
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li>
+                    <button id="theme-toggle" aria-label="Toggle Theme">
+                        <svg class="bulb-off" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5.5 5.5 0 0 0 12 2.5 5.5 5.5 0 0 0 6.5 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"></path>
+                            <path d="M9 18h6"></path>
+                            <path d="M10 22h4"></path>
+                        </svg>
+                        <svg class="bulb-on" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5.5 5.5 0 0 0 12 2.5 5.5 5.5 0 0 0 6.5 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"></path>
+                            <path d="M9 18h6"></path>
+                            <path d="M10 22h4"></path>
+                            <path d="M12 2v-1"></path>
+                            <path d="M12 22v1"></path>
+                            <path d="M22 12h-1"></path>
+                            <path d="M2 12h-1"></path>
+                            <path d="M19.07 4.93l-.7.7"></path>
+                            <path d="M5.64 18.36l-.7.7"></path>
+                            <path d="M18.36 18.36l.7.7"></path>
+                            <path d="M4.93 4.93l.7.7"></path>
+                        </svg>
+                    </button>
+                </li>
             </ul>
         </nav>
     </header>
+
     <div class="container">
         <section id="hero">
             <h1>Building Secure, Automated, and Scalable Cloud Solutions</h1>
@@ -26,40 +49,38 @@
         </section>
 
         <section id="about" class="flow-section">
-    <p class="section-label">Identity</p>
-    <div class="flow-grid">
-        <div>
-            <h2>A multi-disciplinary approach to cloud architecture, network infrastructure, and automation systems.</h2>
-            
-            <p style="color: var(--text-muted); max-width: 700px; margin-bottom: 1.5rem; line-height: 1.6;">
-                Driven by the synergy of technical engineering and market-focused strategy, I am an Infrastructure and Solutions Engineer aiming for the heart of the FinTech sector. My background combines rigorous technical expertise in modern cloud environments and network security with a foundational understanding of corporate accounting, economics, and systems management.
-            </p>
-            
-            <p style="color: var(--text-muted); max-width: 700px; line-height: 1.6;">
-                Navigating diverse environments has instilled in me a strong cross-cultural intelligence, ensuring I build technology that communicates effectively across global teams. I focus on developing high-performance, automated architecture that drives business value and shapes tomorrow's financial services market.
-            </p>
-        </div>
-    </div>
-</section>
+            <p class="section-label">Identity</p>
+            <div class="flow-grid">
+                <div>
+                    <h2>A multi-disciplinary approach to cloud architecture, network infrastructure, and automation systems.</h2>
+                    <p class="bio-text">
+                        Driven by the synergy of technical engineering and market-focused strategy, I am an Infrastructure and Solutions Engineer aiming for the heart of the FinTech sector. My background combines rigorous technical expertise in modern cloud environments and network security with a foundational understanding of corporate accounting, economics, and systems management.
+                    </p>
+                    <p class="bio-text">
+                        Navigating diverse environments has instilled in me a strong cross-cultural intelligence, ensuring I build technology that communicates effectively across global teams. I focus on developing high-performance, automated architecture that drives business value and shapes tomorrow's financial services market.
+                    </p>
+                </div>
+            </div>
+        </section>
 
         <section id="projects" class="flow-section">
             <p class="section-label">Projects</p>
             <div class="flow-grid">
                 <div class="project-item">
                     <h3>Cloud Network Operations Lab</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    <p class="desc-main">
                         An open-source repository focusing on multi-cloud configurations and secure enterprise routing patterns.
                     </p>
-                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                    <p class="desc-sub">
                         Features standard design templates for transit gateways, automated VPN failovers, and rigorous perimeter security controls across hybrid environments.
                     </p>
                 </div>
                 <div class="project-item">
                     <h3>Automated AWS Infrastructure</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    <p class="desc-main">
                         Deploying dual-stack VPC architectures seamlessly using declarative Terraform frameworks.
                     </p>
-                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                    <p class="desc-sub">
                         Implements end-to-end continuous integration pipelines to validate, plan, and apply live structural changes while enforcing zero-trust networking policies.
                     </p>
                 </div>
@@ -67,15 +88,15 @@
         </section>
 
         <section id="experience" class="flow-section">
-            <p class="section-label">Exprience</p>
+            <p class="section-label">Experience</p>
             <div class="flow-grid">
                 <div class="exp-item">
                     <h3>Solutions & Network Engineering</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 0.5rem;">Focusing on core network routing, infrastructure provisioning, and automation lifecycle management.</p>
+                    <p class="desc-main" style="margin-bottom: 0;">Focusing on core network routing, infrastructure provisioning, and automation lifecycle management.</p>
                 </div>
                 <div class="exp-item">
                     <h3>Systems Deployment & Integrations</h3>
-                    <p style="color: var(--text-muted);">Translating deep business logic requirements into secure, high-performing cloud application environments.</p>
+                    <p class="desc-main" style="margin-bottom: 0;">Translating deep business logic requirements into secure, high-performing cloud application environments.</p>
                 </div>
             </div>
         </section>
@@ -84,7 +105,7 @@
             <p class="section-label">Connection</p>
             <div>
                 <h2>Have an idea or a project in mind? Let's talk architecture.</h2>
-                <p style="margin-bottom: 2rem; color: var(--text-muted);">Reach out directly to open a conversation about cloud solutions or network infrastructure.</p>
+                <p class="desc-main" style="margin-bottom: 2rem;">Reach out directly to open a conversation about cloud solutions or network infrastructure.</p>
                 <a href="mailto:your-email@example.com" class="cta-link">Send an Email</a>
             </div>
         </section>
@@ -99,7 +120,7 @@
 
             <div class="resume-controls-bar">
                 <div class="resume-file-details">
-                    <span class="resume-icon-doc"></span>
+                    <span class="resume-icon-doc">📄</span>
                     <span>pdf</span>
                 </div>
                 <a href="resume.pdf" download="Francis_Shaba_Miyoba_Resume.pdf" class="resume-orange-btn">
@@ -114,10 +135,18 @@
             </div>
         </div>
     </div>
+
     <footer>
         <p>&copy; 2026 Francis Shaba Miyoba.</p>
     </footer>
-    </div>
-</div>
+
+    <script>
+        const toggleButton = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('dark-theme');
+        });
+    </script>
 </body>
 </html>
