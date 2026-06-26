@@ -401,8 +401,22 @@ footer {
     display: block;
     font-size: clamp(1rem, 3vw, 1.5rem);
     font-weight: 400;
-    color: #;ffffff;
+    color: #ffffff;
     letter-spacing: 4px;
     margin-top: 1rem;
     min-height: 1.5em;
+}
+/* ========================================== */
+/* DIGITAL CLOCK                           */
+/* ========================================== */
+#digital-clock {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    z-index: 998;
+    transition: color var(--fluid-speed) ease;
 }
