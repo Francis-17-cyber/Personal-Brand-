@@ -43,7 +43,7 @@ html {
 body {
     background-color: var(--background);
     color: var(--text-main);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: Georgia, "Times New Roman", Times, serif;
     line-height: 1.7;
     overflow-x: hidden;
     transition: background-color var(--fluid-speed) ease, color var(--fluid-speed) ease;
@@ -406,17 +406,29 @@ footer {
     margin-top: 1rem;
     min-height: 1.5em;
 }
+
+/* ROTATING WORD                           */
 /* ========================================== */
-/* DIGITAL CLOCK                           */
-/* ========================================== */
-#digital-clock {
-    position: fixed;
-    bottom: 2rem;
-    left: 2rem;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    letter-spacing: 2px;
-    z-index: 998;
-    transition: color var(--fluid-speed) ease;
+#rotating-word-wrapper {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    height: 1.2em;
+}
+
+#rotating-word {
+    display: inline-block;
+    color: var(--accent);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+}
+
+#rotating-word.slide-out {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+#rotating-word.slide-in-from-below {
+    transform: translateY(100%);
+    opacity: 0;
+    transition: none;
 }

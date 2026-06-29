@@ -6,7 +6,7 @@
     <title>Portfolio</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="dark-theme"    >
+<body class="dark-theme">
     <!-- INTRO SPLASH SCREEN -->
 <div id="intro-overlay">
     <div id="intro-content">
@@ -50,7 +50,7 @@
 
     <div class="container">
         <section id="hero">
-            <h1>Building Secure, Automated, and Scalable Cloud Solutions</h1>
+            <h1>Building <span id="rotating-word-wrapper"><span id="rotating-word">Secure</span></span>, Automated, and Scalable Cloud Solutions</h1>
             <p>Solutions Engineer specializing in AWS, Azure, and Infrastructure as Code.</p>
             <a href="#contact" class="cta-link">Let's connect</a>
         </section>
@@ -225,6 +225,33 @@
             overlay.remove();
         }, 800);
     }
+    updateClock();
+        setInterval(updateClock, 1000);
+
+        // — Rotating Word —
+        const rotatingWords = ["Secure", "Resilient", "Compliant"];
+        let wordIndex = 0;
+        const rotatingEl = document.getElementById('rotating-word');
+
+        function rotateWord() {
+            rotatingEl.classList.add('slide-out');
+
+            setTimeout(() => {
+                wordIndex = (wordIndex + 1) % rotatingWords.length;
+                rotatingEl.textContent = rotatingWords[wordIndex];
+
+                rotatingEl.classList.remove('slide-out');
+                rotatingEl.classList.add('slide-in-from-below');
+
+                rotatingEl.getBoundingClientRect();
+
+                rotatingEl.classList.remove('slide-in-from-below');
+            }, 500);
+        }
+
+        setInterval(rotateWord, 2500);
+
+
 
     // Kick everything off
     showNextWord();
