@@ -573,3 +573,169 @@ footer {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
 }
+
+/* DARK/LIGHT MODE SECTION VISIBILITY      */
+/* ========================================== */
+
+/* Resume only shows in dark mode */
+#resume-section {
+    display: none;
+}
+body.dark-theme #resume-section {
+    display: block;
+}
+
+/* VS Code editor only shows in light mode */
+#vscode-editor-section {
+    display: none;
+}
+body:not(.dark-theme) #vscode-editor-section {
+    display: block;
+}
+
+
+/* LIVE VS CODE EDITOR                     */
+/* ========================================== */
+#vscode-editor-section {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto 8rem auto;
+    padding: 0 2rem;
+}
+
+#vscode-window {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+    border: 1px solid #2d2d2d;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Mac OS Title Bar */
+#vscode-titlebar {
+    background-color: #2d2d2d;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#vscode-traffic-lights {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.traffic-red    { width: 13px; height: 13px; border-radius: 50%; background-color: #ff5f57; display: inline-block; }
+.traffic-yellow { width: 13px; height: 13px; border-radius: 50%; background-color: #ffbd2e; display: inline-block; }
+.traffic-green  { width: 13px; height: 13px; border-radius: 50%; background-color: #28c840; display: inline-block; }
+
+#vscode-title {
+    color: #9ca3af;
+    font-size: 0.8rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    flex: 1;
+    text-align: center;
+}
+
+/* Main split: sidebar + editor */
+#vscode-main {
+    display: flex;
+    height: 500px;
+    background-color: #1e1e1e;
+}
+
+/* File Explorer Sidebar */
+#vscode-sidebar {
+    width: 220px;
+    background-color: #252526;
+    border-right: 1px solid #1e1e1e;
+    padding: 1rem 0;
+    flex-shrink: 0;
+    overflow-y: auto;
+}
+
+.sidebar-label {
+    color: #9ca3af;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    padding: 0 1rem;
+    margin-bottom: 0.75rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.sidebar-folder {
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.4rem 1rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.sidebar-file {
+    color: #9ca3af;
+    font-size: 0.8rem;
+    padding: 0.4rem 1rem 0.4rem 2rem;
+    cursor: pointer;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.sidebar-file:hover {
+    background-color: #2a2d2e;
+    color: #ffffff;
+}
+
+.sidebar-file.active {
+    background-color: #37373d;
+    color: #ffffff;
+}
+
+/* Editor Area */
+#vscode-editor-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* Tab Bar */
+#vscode-tabbar {
+    background-color: #252526;
+    display: flex;
+    border-bottom: 1px solid #1e1e1e;
+    flex-shrink: 0;
+}
+
+.vscode-tab {
+    padding: 8px 20px;
+    font-size: 0.8rem;
+    color: #9ca3af;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    border-right: 1px solid #1e1e1e;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.vscode-tab.active {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border-top: 2px solid #06B6D4;
+}
+
+/* Monaco container fills remaining space */
+#monaco-container {
+    flex: 1;
+    width: 100%;
+}
+
+@media (max-width: 650px) {
+    #vscode-sidebar {
+        width: 140px;
+    }
+    #vscode-main {
+        height: 400px;
+    }
+}
