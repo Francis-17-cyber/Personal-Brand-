@@ -316,112 +316,289 @@ body.dark-theme #resume-section { display: block; }
 #rotating-word.slide-out { transform: translateY(-100%); opacity: 0; }
 #rotating-word.slide-in-from-below { transform: translateY(100%); opacity: 0; transition: none; }
 
-/* ========================================== */
-/* LIVE VS CODE EDITOR — light mode only      */
-/* ========================================== */
-#vscode-editor-section { display: none; }
-body:not(.dark-theme) #vscode-editor-section { display: block; }
+/*==========================================
+    WINDOWS VS CODE
+==========================================*/
 
-#vscode-editor-section {
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto 8rem auto;
-    padding: 0 2rem;
+#vscode-editor-section{
+    display:none;
 }
 
-#vscode-window {
-    width: 100%;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
-    border: 1px solid #2d2d2d;
-    font-family: 'Courier New', Courier, monospace;
+body:not(.dark-theme) #vscode-editor-section{
+    display:block;
 }
 
-#vscode-titlebar {
-    background-color: #2d2d2d;
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+#vscode-editor-section{
+
+    width:100%;
+
+    max-width:1200px;
+
+    margin:0 auto 120px;
+
+    padding:0 20px;
+
 }
 
-#vscode-traffic-lights { display: flex; gap: 8px; align-items: center; }
-.traffic-red    { width: 13px; height: 13px; border-radius: 50%; background-color: #ff5f57; display: inline-block; }
-.traffic-yellow { width: 13px; height: 13px; border-radius: 50%; background-color: #ffbd2e; display: inline-block; }
-.traffic-green  { width: 13px; height: 13px; border-radius: 50%; background-color: #28c840; display: inline-block; }
+#vscode-window{
 
-#vscode-title {
-    color: #9ca3af;
-    font-size: 0.8rem;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    flex: 1;
-    text-align: center;
+    height:720px;
+
+    border:1px solid #313131;
+
+    background:#1e1e1e;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 25px 80px rgba(0,0,0,.35);
+
 }
 
-#vscode-main { display: flex; height: 500px; background-color: #1e1e1e; }
+/* TITLE BAR */
 
-#vscode-sidebar {
-    width: 220px;
-    background-color: #252526;
-    border-right: 1px solid #1e1e1e;
-    padding: 1rem 0;
-    flex-shrink: 0;
-    overflow-y: auto;
+#vscode-titlebar{
+
+    height:36px;
+
+    background:#181818;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    border-bottom:1px solid #2d2d2d;
+
+    padding-left:15px;
+
 }
 
-.sidebar-label {
-    color: #9ca3af;
-    font-size: 0.7rem;
-    letter-spacing: 1px;
-    padding: 0 1rem;
-    margin-bottom: 0.75rem;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+#window-title{
+
+    color:#cccccc;
+
+    font-size:13px;
+
+    font-family:"Segoe UI";
+
 }
 
-.sidebar-folder {
-    color: #ffffff;
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 0.4rem 1rem;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+#window-buttons{
+
+    display:flex;
+
+    height:100%;
+
 }
 
-.sidebar-file {
-    color: #9ca3af;
-    font-size: 0.8rem;
-    padding: 0.4rem 1rem 0.4rem 2rem;
-    cursor: pointer;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    transition: background-color 0.15s ease, color 0.15s ease;
-}
-.sidebar-file:hover { background-color: #2a2d2e; color: #ffffff; }
-.sidebar-file.active { background-color: #37373d; color: #ffffff; }
+.win-btn{
 
-#vscode-editor-area { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+    width:46px;
 
-#vscode-tabbar {
-    background-color: #252526;
-    display: flex;
-    border-bottom: 1px solid #1e1e1e;
-    flex-shrink: 0;
+    border:none;
+
+    background:transparent;
+
+    cursor:pointer;
+
 }
 
-.vscode-tab {
-    padding: 8px 20px;
-    font-size: 0.8rem;
-    color: #9ca3af;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    border-right: 1px solid #1e1e1e;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+.win-btn:hover{
+
+    background:#2d2d2d;
+
 }
-.vscode-tab.active { background-color: #1e1e1e; color: #ffffff; border-top: 2px solid #06B6D4; }
 
-#monaco-container { flex: 1; width: 100%; }
+.close:hover{
 
-@media (max-width: 650px) {
-    #vscode-sidebar { width: 140px; }
-    #vscode-main { height: 400px; }
+    background:#e81123;
+
+}
+
+/* BODY */
+
+#vscode-body{
+
+    display:flex;
+
+    height:calc(100% - 36px);
+
+}
+
+/* ACTIVITY BAR */
+
+#activity-bar{
+
+    width:48px;
+
+    background:#181818;
+
+    border-right:1px solid #2d2d2d;
+
+}
+
+.activity-icon{
+
+    height:48px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#858585;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+    font-size:18px;
+
+}
+
+.activity-icon:hover{
+
+    color:white;
+
+}
+
+.activity-icon.active{
+
+    color:white;
+
+    border-left:2px solid #007acc;
+
+}
+
+/* SIDEBAR */
+
+#vscode-sidebar{
+
+    width:250px;
+
+    background:#252526;
+
+    border-right:1px solid #2d2d2d;
+
+}
+
+.sidebar-header{
+
+    padding:14px;
+
+    color:#bbbbbb;
+
+    font:600 11px "Segoe UI";
+
+    letter-spacing:1px;
+
+}
+
+.sidebar-folder{
+
+    padding:8px 14px;
+
+    color:white;
+
+    font:600 12px "Segoe UI";
+
+}
+
+.sidebar-file{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:8px 18px;
+
+    color:#cccccc;
+
+    font:13px "Segoe UI";
+
+    cursor:pointer;
+
+}
+
+.sidebar-file:hover{
+
+    background:#2a2d2e;
+
+}
+
+.sidebar-file.active{
+
+    background:#37373d;
+
+    border-left:2px solid #007acc;
+
+}
+
+.sidebar-file i{
+
+    color:#75beff;
+
+}
+
+/* EDITOR */
+
+#vscode-editor-area{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+/* TAB BAR */
+
+#vscode-tabbar{
+
+    height:35px;
+
+    background:#252526;
+
+    border-bottom:1px solid #2d2d2d;
+
+    display:flex;
+
+}
+
+/* MONACO */
+
+#monaco-container{
+
+    flex:1;
+
+}
+
+/* STATUS BAR */
+
+#status-bar{
+
+    height:24px;
+
+    background:#007acc;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 15px;
+
+    font:12px "Segoe UI";
+
 }

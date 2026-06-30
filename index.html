@@ -6,6 +6,7 @@
     <title>Portfolio</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@vscode/codicons/dist/codicon.css">
 </head>
 <body class="dark-theme">
 
@@ -147,37 +148,119 @@
         </div>
     </div>
 
-    <!-- LIVE VS CODE EDITOR — light mode only -->
-    <div id="vscode-editor-section">
-        <div id="vscode-window">
-            <div id="vscode-titlebar">
-                <div id="vscode-traffic-lights">
-                    <span class="traffic-red"></span>
-                    <span class="traffic-yellow"></span>
-                    <span class="traffic-green"></span>
-                </div>
-                <div id="vscode-title">Francis-17-cyber / AWS-Projects</div>
+<!-- ========================= -->
+<!-- VS CODE EDITOR -->
+<!-- ========================= -->
+
+<div id="vscode-editor-section">
+
+    <div id="vscode-window">
+
+        <!-- Windows Title Bar -->
+        <div id="vscode-titlebar">
+
+            <div id="window-title">
+                AWS-Projects - Visual Studio Code
             </div>
 
-            <div id="vscode-main">
-                <div id="vscode-sidebar">
-                    <div class="sidebar-label">EXPLORER</div>
-                    <div class="sidebar-folder">AWS-PROJECTS</div>
-                    <div class="sidebar-file active" data-file="vpc.tf">📄 vpc.tf</div>
-                    <div class="sidebar-file" data-file="lambda_handler.py">📄 lambda_handler.py</div>
-                    <div class="sidebar-file" data-file="deploy.yml">📄 deploy.yml</div>
-                    <div class="sidebar-file" data-file="README.md">📄 README.md</div>
-                </div>
-
-                <div id="vscode-editor-area">
-                    <div id="vscode-tabbar">
-                        <div class="vscode-tab active" data-file="vpc.tf">📄 vpc.tf</div>
-                    </div>
-                    <div id="monaco-container"></div>
-                </div>
+            <div id="window-buttons">
+                <button class="win-btn minimize"></button>
+                <button class="win-btn maximize"></button>
+                <button class="win-btn close"></button>
             </div>
+
         </div>
+
+        <div id="vscode-body">
+
+            <!-- Activity Bar -->
+
+            <div id="activity-bar">
+
+    <div class="activity-icon active">
+        <i class="codicon codicon-files"></i>
     </div>
+
+    <div class="activity-icon">
+        <i class="codicon codicon-search"></i>
+    </div>
+
+    <div class="activity-icon">
+        <i class="codicon codicon-source-control"></i>
+    </div>
+
+    <div class="activity-icon">
+        <i class="codicon codicon-run-all"></i>
+    </div>
+
+    <div class="activity-icon">
+        <i class="codicon codicon-extensions"></i>
+    </div>
+
+</div>
+
+            <!-- Explorer -->
+
+            <div id="vscode-sidebar">
+
+                <div class="sidebar-header">
+                    EXPLORER
+                </div>
+
+                <div class="sidebar-folder">
+                    AWS-PROJECTS
+                </div>
+
+                <div class="sidebar-file active" data-file="vpc.tf">
+                 <i class="codicon codicon-symbol-module"></i>   
+                    <span>vpc.tf</span>
+                </div>
+
+                <div class="sidebar-file" data-file="lambda_handler.py">
+                    <i class="codicon codicon-symbol-method"></i>
+                    <span>lambda_handler.py</span>
+                </div>
+
+                <div class="sidebar-file" data-file="deploy.yml">
+                    <i class="codicon codicon-settings-gear"></i>
+                    <span>deploy.yml</span>
+                </div>
+
+                <div class="sidebar-file" data-file="README.md">
+                   <i class="codicon codicon-book"></i>
+                    <span>README.md</span>
+                </div>
+
+            </div>
+
+            <!-- Editor -->
+
+            <div id="vscode-editor-area">
+
+                <div id="vscode-tabbar">
+                </div>
+
+                <div id="monaco-container"></div>
+
+                <div id="status-bar">
+
+                    <div class="status-left">
+                        Terraform
+                    </div>
+
+                    <div class="status-right">
+                        UTF-8 &nbsp; | &nbsp; LF
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>  
 
     <footer>
         <p>&copy; 2026 Francis Shaba Miyoba.</p>
