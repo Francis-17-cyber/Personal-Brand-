@@ -117,33 +117,38 @@
             </div>
         </section>
 
-        <div class="custom-resume-section">
-            <div class="resume-terminal-header">
-                <div class="resume-prompt">
-                    <span class="resume-arrow">&gt;</span> open resume.pdf<span class="resume-cursor">_</span>
+    </div>
+
+    <!-- VS CODE GITHUB TERMINAL -->
+    <div id="vscode-terminal">
+        <div id="vscode-window">
+            <!-- Mac OS Title Bar -->
+            <div id="vscode-titlebar">
+                <div id="vscode-traffic-lights">
+                    <span class="traffic-red"></span>
+                    <span class="traffic-yellow"></span>
+                    <span class="traffic-green"></span>
                 </div>
-                <h2 class="resume-title">comp</h2>
+                <div id="vscode-title">Francis-17-cyber / AWS-Projects — commits</div>
             </div>
 
-            <div class="resume-controls-bar">
-                <div class="resume-file-details">
-                    <span class="resume-icon-doc">📄</span>
-                    <span>pdf</span>
+            <!-- VS Code Tab Bar -->
+            <div id="vscode-tabbar">
+                <div class="vscode-tab active">
+                    <span>&#128196;</span> git_log.sh
                 </div>
-                <a href="resume.pdf" download="Francis_Shaba_Miyoba_Resume.pdf" class="resume-orange-btn">
-                     Download PDF
-                </a>
             </div>
 
-            <div class="resume-canvas-frame">
-                <iframe src="resume.pdf#toolbar=1&navpanes=0" type="application/pdf" width="100%" height="100%">
-                    <p>Your browser doesn't support embedded PDFs. <a href="resume.pdf">Click here to download it directly.</a></p>
-                </iframe>
+            <!-- Terminal Output Area -->
+            <div id="vscode-body">
+                <div id="terminal-output"></div>
+                <div id="terminal-cursor">▋</div>
             </div>
         </div>
     </div>
 
-    <footer>
+    <footer>    
+    
         <p>&copy; 2026 Francis Shaba Miyoba.</p>
     </footer>
 
@@ -225,8 +230,7 @@
             overlay.remove();
         }, 800);
     }
-    updateClock();
-        setInterval(updateClock, 1000);
+
 
         // — Rotating Word —
         const rotatingWords = ["Secure", "Resilient", "Compliant"];
