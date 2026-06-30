@@ -148,12 +148,97 @@ VPC design, serverless deployments, and CI/CD pipelines.
         };
 
         const fileLanguages = {
+
             "vpc.tf": "hcl",
             "lambda_handler.py": "python",
             "deploy.yml": "yaml",
             "README.md": "markdown"
         };
 
+       const explorerTree = [
+
+    {
+        folder: "networking",
+        files: [
+            "vpc.tf",
+            "subnets.tf",
+            "security-groups.tf"
+        ]
+    },
+
+    {
+        folder: "compute",
+        files: [
+            "ec2.tf",
+            "autoscaling.tf"
+        ]
+    },
+
+    {
+        folder: "serverless",
+        files: [
+            "lambda_handler.py"
+        ]
+    },
+
+    {
+        folder: "pipelines",
+        files: [
+            "deploy.yml"
+        ]
+    },
+
+    {
+        folder: "",
+        files: [
+            "README.md"
+        ]
+    }
+
+]; 
+function buildExplorer() {
+
+    const tree = document.getElementById("file-tree");
+
+    tree.innerHTML = "";
+
+    explorerTree.forEach(section => {
+
+        // Folder
+        if (section.folder !== "") {
+
+            const folder = document.createElement("div");
+
+            folder.className = "explorer-folder";
+
+            folder.innerHTML = `
+                <i class="codicon codicon-folder"></i>
+                <span>${section.folder}</span>
+            `;
+
+            tree.appendChild(folder);
+
+        }
+
+        // Files
+        section.files.forEach(file => {
+
+            const item = document.createElement("div");
+
+            item.className = "explorer-file";
+
+            item.innerHTML = `
+                <i class="codicon codicon-file-code"></i>
+                <span>${file}</span>
+            `;
+
+            tree.appendChild(item);
+
+        });
+
+    });
+
+}
         let monacoEditor = null;
         let monacoLoaded = false;
 
@@ -192,7 +277,8 @@ function renderTabs() {
 
         const tab = document.createElement("div");
 
-        tab.className = file === activeFile
+        tab.className =
+            file === activeFile
             ? "vscode-tab active"
             : "vscode-tab";
 
@@ -203,144 +289,96 @@ function renderTabs() {
             <i class="codicon codicon-close tab-close"></i>
         `;
 
-        tabbar.appendChild(tab);
+        /* Click tab */
 
-    });
+        tab.addEventListener("click", (e) => {
 
-}
+            if(e.target.classList.contains("tab-close")) return;
 
-renderTabs();
+            activeFile = file;
 
-        function checkAndLoadMonaco() {
-            if (!document.body.classList.contains('dark-theme')) {
-                initMonaco();
-            }
-        }
+            renderTabs();
 
-        // — Kick everything off —
-        showNextWord();
-        checkAndLoadMonaco();
-document.querySelectorAll(".sidebar-file").forEach(file => {
+            document.querySelectorAll(".sidebar-file")
+                .forEach(f=>{
 
-    file.addEventListener("click", () => {
+                    f.classList.toggle(
+                        "active",
+                        f.dataset.file===file
+                    );
 
-        const fileName = file.dataset.file;
-
-        activeFile = fileName;
-
-        if (!openTabs.includes(fileName)) {
-
-            openTabs.push(fileName);
-
-        }
-
-        renderTabs();
-
-        document.querySelectorAll(".sidebar-file")
-            .forEach(f => f.classList.remove("active"));
-
-        file.classList.add("active");
-
-        if (monacoEditor) {
+                });
 
             monacoEditor.setValue(
-                placeholderFiles[fileName]
+                placeholderFiles[file]
             );
 
             monaco.editor.setModelLanguage(
 
                 monacoEditor.getModel(),
 
-                fileLanguages[fileName]
+                fileLanguages[file]
 
             );
 
-        }
+        });
+
+        /* Close */
+
+        tab.querySelector(".tab-close")
+        .addEventListener("click",(e)=>{
+
+            e.stopPropagation();
+
+            const index=openTabs.indexOf(file);
+
+            if(index>-1){
+
+                openTabs.splice(index,1);
+
+            }
+
+            if(activeFile===file){
+
+                activeFile=openTabs[0] || "";
+
+            }
+
+            if(activeFile){
+
+                monacoEditor.setValue(
+
+                    placeholderFiles[activeFile]
+
+                );
+
+                monaco.editor.setModelLanguage(
+
+                    monacoEditor.getModel(),
+
+                    fileLanguages[activeFile]
+
+                );
+
+            }
+
+            renderTabs();
+
+        });
+
+        tabbar.appendChild(tab);
 
     });
 
-});   
-/* =====================================
-   TERMINAL DEMO
-===================================== */
+}   
+/* ==========================
+   START WEBSITE
+========================== */
 
-const terminal = document.getElementById("terminal-text");
+showNextWord();
 
-const terminalCommands = [
+buildExplorer();
 
-`terraform init
+checkAndLoadMonaco();
 
-Initializing the backend...
-
-Initializing provider plugins...
-
-Terraform has been successfully initialized!`,
-
-`terraform apply
-
-aws_vpc.main: Creating...
-
-aws_subnet.public: Creating...
-
-aws_security_group.web: Creating...
-
-Apply complete!
-
-Resources: 3 added.`,
-
-`git status
-
-On branch main
-
-nothing to commit,
-
-working tree clean`,
-
-`aws ec2 describe-instances
-
-InstanceId: i-08f2ac9139f
-
-State: running
-
-Public IP: 3.145.xxx.xxx`
-
-];
-
-let terminalIndex = 0;
-
-function typeTerminal(text){
-
-    terminal.textContent="";
-
-    let i=0;
-
-    const timer=setInterval(()=>{
-
-        terminal.textContent+=text.charAt(i);
-
-        i++;
-
-        if(i>=text.length){
-
-            clearInterval(timer);
-        }
-
-    },15);
-
-}
-
-typeTerminal(terminalCommands[0]);
-
-setInterval(()=>{
-
-    terminalIndex++;
-
-    if(terminalIndex>=terminalCommands.length){
-
-        terminalIndex=0;
-
-    }
-
-    typeTerminal(terminalCommands[terminalIndex]);
-
-},8000);     
+renderTabs();

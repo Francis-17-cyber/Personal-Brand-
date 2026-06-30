@@ -149,7 +149,7 @@
     </div>
 
 <!-- ========================= -->
-<!-- VS CODE EDITOR -->
+<!-- VS CODE SECTION -->
 <!-- ========================= -->
 
 <div id="vscode-editor-section">
@@ -157,150 +157,118 @@
     <div id="vscode-window">
 
         <!-- Windows Title Bar -->
+
         <div id="vscode-titlebar">
 
-            <div id="window-title">
-                AWS-Projects - Visual Studio Code
+            <div id="window-left">
+
+                <span id="window-title">
+                    AWS-INFRASTRUCTURE - Visual Studio Code
+                </span>
+
             </div>
 
-            <div id="window-buttons">
-                <button class="win-btn minimize"></button>
-                <button class="win-btn maximize"></button>
-                <button class="win-btn close"></button>
+            <div id="window-controls">
+
+                <button class="window-btn minimize"></button>
+                <button class="window-btn maximize"></button>
+                <button class="window-btn close"></button>
+
             </div>
 
         </div>
+
+        <!-- Main Window -->
 
         <div id="vscode-body">
 
             <!-- Activity Bar -->
 
-            <div id="activity-bar">
+            <aside id="activity-bar">
 
-    <div class="activity-icon active">
-        <i class="codicon codicon-files"></i>
-    </div>
+                <div class="activity-item active">
+                    <i class="codicon codicon-files"></i>
+                </div>
 
-    <div class="activity-icon">
-        <i class="codicon codicon-search"></i>
-    </div>
+                <div class="activity-item">
+                    <i class="codicon codicon-search"></i>
+                </div>
 
-    <div class="activity-icon">
-        <i class="codicon codicon-source-control"></i>
-    </div>
+                <div class="activity-item">
+                    <i class="codicon codicon-source-control"></i>
+                </div>
 
-    <div class="activity-icon">
-        <i class="codicon codicon-run-all"></i>
-    </div>
+                <div class="activity-item">
+                    <i class="codicon codicon-run-all"></i>
+                </div>
 
-    <div class="activity-icon">
-        <i class="codicon codicon-extensions"></i>
-    </div>
+                <div class="activity-item">
+                    <i class="codicon codicon-extensions"></i>
+                </div>
 
-</div>
+            </aside>
 
             <!-- Explorer -->
 
-            <div id="vscode-sidebar">
+            <aside id="explorer">
 
-                <div class="sidebar-header">
+                <div class="explorer-title">
+
                     EXPLORER
+
                 </div>
 
-                <div class="sidebar-folder">
-                    AWS-PROJECTS
+                <div class="project-name">
+
+                    AWS-INFRASTRUCTURE
+
                 </div>
 
-                <div class="sidebar-file active" data-file="vpc.tf">
-                 <i class="codicon codicon-symbol-module"></i>   
-                    <span>vpc.tf</span>
+                <div id="file-tree">
+
+                    <!-- JavaScript builds this -->
+
                 </div>
 
-                <div class="sidebar-file" data-file="lambda_handler.py">
-                    <i class="codicon codicon-symbol-method"></i>
-                    <span>lambda_handler.py</span>
-                </div>
-
-                <div class="sidebar-file" data-file="deploy.yml">
-                    <i class="codicon codicon-settings-gear"></i>
-                    <span>deploy.yml</span>
-                </div>
-
-                <div class="sidebar-file" data-file="README.md">
-                   <i class="codicon codicon-book"></i>
-                    <span>README.md</span>
-                </div>
-
-            </div>
+            </aside>
 
             <!-- Editor -->
 
-            <div id="vscode-editor-area">
+            <main id="editor-area">
 
-                <div id="vscode-tabbar">
+                <div id="breadcrumbs"></div>
+
+                <div id="tab-bar"></div>
+
+                <div id="monaco-container"></div>
+
+                <div id="terminal-panel"></div>
+
+                <div id="status-bar">
+
+                    <div>
+
+                        Terraform
+
+                    </div>
+
+                    <div>
+
+                        UTF-8 &nbsp; | &nbsp; LF
+
+                    </div>
+
                 </div>
 
-<div id="monaco-container"></div>
+            </main>
 
-<!-- Bottom Panel -->
-
-<div id="bottom-panel">
-
-    <div id="panel-tabs">
-
-        <div class="panel-tab active">
-            TERMINAL
         </div>
-
-        <div class="panel-tab">
-            PROBLEMS
-        </div>
-
-        <div class="panel-tab">
-            OUTPUT
-        </div>
-
-        <div class="panel-tab">
-            DEBUG CONSOLE
-        </div>
-
-        <div class="panel-tab">
-            PORTS
-        </div>
-
-    </div>
-
-    <div id="terminal-window">
-
-<pre id="terminal-content">Windows PowerShell
-
-Copyright (C) Microsoft Corporation. All rights reserved.
-
-PS C:\Users\Francis\AWS-Projects> <span id="terminal-text"></span><span class="terminal-cursor"></span></pre>
 
     </div>
 
 </div>
 
-<div id="status-bar">
-
-                    <div class="status-left">
-                        Terraform
-                    </div>
-
-                    <div class="status-right">
-                        UTF-8 &nbsp; | &nbsp; LF
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>  
+  
 
     <footer>
         <p>&copy; 2026 Francis Shaba Miyoba.</p>
