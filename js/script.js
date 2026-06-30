@@ -207,19 +207,20 @@ function buildExplorer() {
         // Folder
         if (section.folder !== "") {
 
-            const folder = document.createElement("div");
+const folder = document.createElement("div");
 
-            folder.className = "explorer-folder";
+folder.className = "explorer-folder";
 
-            folder.innerHTML = `
-                <i class="codicon codicon-folder"></i>
-                <span>${section.folder}</span>
-            `;
+folder.innerHTML = `
+    <i class="codicon codicon-chevron-down folder-arrow"></i>
+    <i class="codicon codicon-folder folder-icon"></i>
+    <span>${section.folder}</span>
+`;
 
-            tree.appendChild(folder);
+tree.appendChild(folder);
 
         }
-
+        
         // Files
         section.files.forEach(file => {
 
@@ -227,12 +228,34 @@ function buildExplorer() {
 
             item.className = "explorer-file";
 
-            item.innerHTML = `
-                <i class="codicon codicon-file-code"></i>
-                <span>${file}</span>
-            `;
+            let icon = "codicon-file-code";
+let iconClass = "";
 
-            tree.appendChild(item);
+if(file.endsWith(".tf")){
+    icon = "codicon-symbol-module";
+    iconClass = "terraform-icon";
+}
+else if(file.endsWith(".py")){
+    icon = "codicon-symbol-method";
+    iconClass = "python-icon";
+}
+else if(file.endsWith(".yml")){
+    icon = "codicon-settings-gear";
+    iconClass = "yaml-icon";
+}
+else if(file.endsWith(".md")){
+    icon = "codicon-book";
+    iconClass = "markdown-icon";
+}
+
+item.innerHTML = `
+    <i class="codicon ${icon} ${iconClass}"></i>
+    <span>${file}</span>
+`;
+
+            item.style.paddingLeft = "32px";
+
+tree.appendChild(item);
 
         });
 
@@ -371,6 +394,7 @@ function renderTabs() {
     });
 
 }   
+
 /* ==========================
    START WEBSITE
 ========================== */
