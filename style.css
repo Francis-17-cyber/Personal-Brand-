@@ -1,44 +1,31 @@
 :root {
-    /* ========================================== */
-    /* ☀️ DEFAULT THEME: WARM MINIMALIST (LIGHT)   */
-    /* ========================================== */
-    --background: #F9F6F0;       /* Soft linen/alabaster cream canvas */
+    --background: #F9F6F0;
     --nav-bg: rgba(249, 246, 240, 0.85);
-    --text-main: #1C1917;        /* Deep charcoal stone for legibility */
-    --text-muted: #6B7280;       /* Mid-tone slate gray for copy */
-    --accent: #D97706;           /* Warm dark amber/gold accent */
+    --text-main: #1C1917;
+    --text-muted: #6B7280;
+    --accent: #D97706;
     --accent-hover: #B45309;
-    --card-bg: #F3F0E9;          /* Slightly deeper card offsets */
-    --border-color: #E7E3DA;     /* Soft warm dividers */
-    --accent-orange: #FF4500;    /* Terminal prompt & CTA accent */
+    --card-bg: #F3F0E9;
+    --border-color: #E7E3DA;
+    --accent-orange: #FF4500;
     --accent-orange-hover: #E03D00;
     --fluid-speed: 0.25s;
 }
 
 body.dark-theme {
-    /* ========================================== */
-    /* 🌑 TOGGLED THEME: MODERN TECH (DARK)       */
-    /* ========================================== */
-    --background: #0B0F19;       /* Deep midnight blue/slate background */
+    --background: #0B0F19;
     --nav-bg: rgba(11, 15, 25, 0.8);
-    --text-main: #F3F4F6;        /* Crisp, clean off-white for headers */
-    --text-muted: #9CA3AF;       /* Muted steel gray for layouts */
-    --accent: #06B6D4;           /* Sharp electric cyan */
-    --accent-hover: #22D3EE;     
-    --card-bg: #111827;          /* Card container background */
-    --border-color: #1F2937;     /* Geometric gridlines */
+    --text-main: #F3F4F6;
+    --text-muted: #9CA3AF;
+    --accent: #06B6D4;
+    --accent-hover: #22D3EE;
+    --card-bg: #111827;
+    --border-color: #1F2937;
 }
 
-/* --- Smooth Scrolling & Global Setup --- */
-html {
-    scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     background-color: var(--background);
@@ -54,12 +41,8 @@ a {
     text-decoration: none;
     transition: color var(--fluid-speed) ease;
 }
+a:hover { color: var(--accent-hover); }
 
-a:hover {
-    color: var(--accent-hover);
-}
-
-/* --- Floating Header --- */
 header {
     position: fixed;
     top: 0;
@@ -82,18 +65,9 @@ nav {
     padding: 1.5rem 2rem;
 }
 
-nav h2 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-}
+nav h2 { font-size: 1.1rem; font-weight: 600; letter-spacing: 1px; }
 
-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 3rem;
-    align-items: center;
-}
+nav ul { display: flex; list-style: none; gap: 3rem; align-items: center; }
 
 nav a {
     color: var(--text-muted);
@@ -101,12 +75,8 @@ nav a {
     font-weight: 400;
     transition: color var(--fluid-speed) ease;
 }
+nav a:hover { color: var(--accent); }
 
-nav a:hover {
-    color: var(--accent);
-}
-
-/* --- Lightbulb Toggle Mechanics --- */
 #theme-toggle {
     background: none;
     border: none;
@@ -118,26 +88,14 @@ nav a:hover {
     justify-content: center;
     transition: color var(--fluid-speed) ease, transform 0.1s ease;
 }
+#theme-toggle:hover { color: var(--accent); transform: scale(1.05); }
 
-#theme-toggle:hover {
-    color: var(--accent);
-    transform: scale(1.05);
-}
-
-/* State controls for the SVGs based on .dark-theme class */
 body.dark-theme .bulb-on { display: none; }
 body.dark-theme .bulb-off { display: block; color: var(--text-muted); }
-
 body:not(.dark-theme) .bulb-on { display: block; color: var(--accent); }
 body:not(.dark-theme) .bulb-off { display: none; }
 
-
-/* --- Fluid Content Layout --- */
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
+.container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
 
 #hero {
     min-height: 90vh;
@@ -171,46 +129,22 @@ body:not(.dark-theme) .bulb-off { display: none; }
     padding-bottom: 4px;
     transition: opacity var(--fluid-speed) ease, color var(--fluid-speed) ease, border-color var(--fluid-speed) ease;
 }
+#hero .cta-link:hover { color: var(--accent); opacity: 0.9; }
 
-#hero .cta-link:hover {
-    color: var(--accent);
-    opacity: 0.9;
-}
-
-/* --- Reusable Class Text Elements --- */
 .bio-text {
-    color: var(--text-muted); 
-    max-width: 700px; 
-    margin-bottom: 1.5rem; 
+    color: var(--text-muted);
+    max-width: 700px;
+    margin-bottom: 1.5rem;
     line-height: 1.6;
     transition: color var(--fluid-speed) ease;
 }
-.bio-text:last-of-type {
-    margin-bottom: 0;
-}
+.bio-text:last-of-type { margin-bottom: 0; }
 
-.desc-main {
-    color: var(--text-muted); 
-    margin-bottom: 1rem;
-    transition: color var(--fluid-speed) ease;
-}
+.desc-main { color: var(--text-muted); margin-bottom: 1rem; transition: color var(--fluid-speed) ease; }
+.desc-sub { color: var(--text-muted); font-size: 0.9rem; transition: color var(--fluid-speed) ease; }
 
-.desc-sub {
-    color: var(--text-muted); 
-    font-size: 0.9rem;
-    transition: color var(--fluid-speed) ease;
-}
-
-/* --- Sections & Cards --- */
-.flow-section {
-    padding: 8rem 0;
-}
-
-.flow-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-}
+.flow-section { padding: 8rem 0; }
+.flow-grid { display: flex; flex-direction: column; gap: 2.5rem; }
 
 .section-label {
     font-size: 0.85rem;
@@ -221,11 +155,7 @@ body:not(.dark-theme) .bulb-off { display: none; }
     transition: color var(--fluid-speed) ease;
 }
 
-.flow-section h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 2rem;
-}
+.flow-section h2 { font-size: 2rem; font-weight: 600; margin-bottom: 2rem; }
 
 .project-item, .exp-item {
     background-color: var(--card-bg);
@@ -234,10 +164,7 @@ body:not(.dark-theme) .bulb-off { display: none; }
     border-radius: 8px;
     transition: transform var(--fluid-speed) ease, border-color var(--fluid-speed) ease, background-color var(--fluid-speed) ease;
 }
-
-.project-item:hover, .exp-item:hover {
-    border-color: var(--accent);
-}
+.project-item:hover, .exp-item:hover { border-color: var(--accent); }
 
 .project-item h3, .exp-item h3 {
     font-size: 1.4rem;
@@ -246,7 +173,6 @@ body:not(.dark-theme) .bulb-off { display: none; }
     color: var(--text-main);
 }
 
-/* --- Minimal Footer --- */
 footer {
     padding: 5rem 0;
     border-top: 1px solid var(--border-color);
@@ -256,7 +182,12 @@ footer {
     transition: border-color var(--fluid-speed) ease, color var(--fluid-speed) ease;
 }
 
-/* --- RESUME COMPONENT STYLES --- */
+/* ========================================== */
+/* RESUME — dark mode only                    */
+/* ========================================== */
+#resume-section { display: none; }
+body.dark-theme #resume-section { display: block; }
+
 .custom-resume-section {
     width: 100%;
     max-width: 1000px;
@@ -264,9 +195,7 @@ footer {
     padding: 20px 0;
 }
 
-.resume-terminal-header {
-    margin-bottom: 20px;
-}
+.resume-terminal-header { margin-bottom: 20px; }
 
 .resume-prompt {
     font-family: 'Courier New', Courier, monospace;
@@ -276,16 +205,8 @@ footer {
     transition: color var(--fluid-speed) ease;
 }
 
-.resume-arrow, .resume-cursor {
-    color: var(--accent-orange);
-    font-weight: bold;
-}
-
-.resume-title {
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin: 0;
-}
+.resume-arrow, .resume-cursor { color: var(--accent-orange); font-weight: bold; }
+.resume-title { font-size: 2.2rem; font-weight: 700; margin: 0; }
 
 .resume-controls-bar {
     display: flex;
@@ -305,7 +226,7 @@ footer {
 .resume-orange-btn {
     display: inline-flex;
     align-items: center;
-    background-color: var(--accent-orange); 
+    background-color: var(--accent-orange);
     color: #ffffff !important;
     text-decoration: none !important;
     padding: 10px 20px;
@@ -314,19 +235,13 @@ footer {
     font-size: 0.9rem;
     transition: background-color var(--fluid-speed) ease, transform 0.1s ease;
 }
-
-.resume-orange-btn:hover {
-    background-color: var(--accent-orange-hover);
-}
-
-.resume-orange-btn:active {
-    transform: scale(0.98);
-}
+.resume-orange-btn:hover { background-color: var(--accent-orange-hover); }
+.resume-orange-btn:active { transform: scale(0.98); }
 
 .resume-canvas-frame {
     width: 100%;
     height: 850px;
-    background-color: #111827; /* Hard dark contrast canvas stays locked for clear engineering legibility */
+    background-color: #111827;
     border-radius: 8px;
     overflow: hidden;
     border: 1px solid var(--border-color);
@@ -334,32 +249,17 @@ footer {
     transition: border-color var(--fluid-speed) ease;
 }
 
-.resume-canvas-frame iframe {
-    border: none;
-    background-color: #111827;
-}
-
-@keyframes resumeBlink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
+.resume-canvas-frame iframe { border: none; background-color: #111827; }
 
 @media (max-width: 650px) {
-    .resume-controls-bar {
-        flex-direction: column;
-        gap: 12px;
-        align-items: flex-start;
-    }
-    .resume-orange-btn {
-        width: 100%;
-        justify-content: center;
-    }
-    .resume-canvas-frame {
-        height: 550px;
-    }
+    .resume-controls-bar { flex-direction: column; gap: 12px; align-items: flex-start; }
+    .resume-orange-btn { width: 100%; justify-content: center; }
+    .resume-canvas-frame { height: 550px; }
 }
+
 /* ========================================== */
-/* INTRO SPLASH SCREEN                     */
+/* INTRO SPLASH SCREEN                        */
+/* ========================================== */
 #intro-overlay {
     position: fixed;
     top: 0;
@@ -373,15 +273,9 @@ footer {
     justify-content: center;
     transition: opacity 0.8s ease;
 }
+#intro-overlay.fade-out { opacity: 0; pointer-events: none; }
 
-#intro-overlay.fade-out {
-    opacity: 0;
-    pointer-events: none;
-}
-
-#intro-content {
-    text-align: center;
-}
+#intro-content { text-align: center; }
 
 #intro-word {
     display: block;
@@ -392,10 +286,7 @@ footer {
     min-height: 1.2em;
     transition: opacity 0.3s ease;
 }
-
-#intro-word.hidden {
-    opacity: 0;
-}
+#intro-word.hidden { opacity: 0; }
 
 #intro-name {
     display: block;
@@ -407,7 +298,8 @@ footer {
     min-height: 1.5em;
 }
 
-/* ROTATING WORD                           */
+/* ========================================== */
+/* ROTATING WORD                              */
 /* ========================================== */
 #rotating-word-wrapper {
     display: inline-block;
@@ -421,181 +313,15 @@ footer {
     color: var(--accent);
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
 }
+#rotating-word.slide-out { transform: translateY(-100%); opacity: 0; }
+#rotating-word.slide-in-from-below { transform: translateY(100%); opacity: 0; transition: none; }
 
-#rotating-word.slide-out {
-    transform: translateY(-100%);
-    opacity: 0;
-}
-
-#rotating-word.slide-in-from-below {
-    transform: translateY(100%);
-    opacity: 0;
-    transition: none;
-}
-
-/*  VS CODE GITHUB TERMINAL                 */
 /* ========================================== */
-#vscode-terminal {
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto 8rem auto;
-    padding: 0 2rem;
-}
-
-#vscode-window {
-    width: 100%;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
-    border: 1px solid #2d2d2d;
-    font-family: 'Courier New', Courier, monospace;
-}
-
-/* Mac OS Title Bar */
-#vscode-titlebar {
-    background-color: #2d2d2d;
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-#vscode-traffic-lights {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-
-.traffic-red {
-    width: 13px;
-    height: 13px;
-    border-radius: 50%;
-    background-color: #ff5f57;
-    display: inline-block;
-}
-
-.traffic-yellow {
-    width: 13px;
-    height: 13px;
-    border-radius: 50%;
-    background-color: #ffbd2e;
-    display: inline-block;
-}
-
-.traffic-green {
-    width: 13px;
-    height: 13px;
-    border-radius: 50%;
-    background-color: #28c840;
-    display: inline-block;
-}
-
-#vscode-title {
-    color: #9ca3af;
-    font-size: 0.8rem;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    flex: 1;
-    text-align: center;
-}
-
-/* Tab Bar */
-#vscode-tabbar {
-    background-color: #252526;
-    display: flex;
-    border-bottom: 1px solid #1e1e1e;
-}
-
-.vscode-tab {
-    padding: 8px 20px;
-    font-size: 0.8rem;
-    color: #9ca3af;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    border-right: 1px solid #1e1e1e;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.vscode-tab.active {
-    background-color: #1e1e1e;
-    color: #ffffff;
-    border-top: 1px solid #06B6D4;
-}
-
-/* Terminal Body */
-#vscode-body {
-    background-color: #1e1e1e;
-    padding: 1.5rem;
-    min-height: 400px;
-    max-height: 500px;
-    overflow-y: auto;
-}
-
-#terminal-output {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-#terminal-output .commit-line {
-    font-size: 0.85rem;
-    line-height: 1.6;
-}
-
-#terminal-output .commit-hash {
-    color: #f59e0b;
-}
-
-#terminal-output .commit-author {
-    color: #06B6D4;
-}
-
-#terminal-output .commit-date {
-    color: #6b7280;
-}
-
-#terminal-output .commit-message {
-    color: #e5e7eb;
-}
-
-#terminal-output .terminal-prompt {
-    color: #28c840;
-}
-
-#terminal-cursor {
-    color: #06B6D4;
-    animation: blink 1s step-end infinite;
-    font-size: 0.85rem;
-    margin-top: 0.5rem;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
-
-/* DARK/LIGHT MODE SECTION VISIBILITY      */
+/* LIVE VS CODE EDITOR — light mode only      */
 /* ========================================== */
+#vscode-editor-section { display: none; }
+body:not(.dark-theme) #vscode-editor-section { display: block; }
 
-/* Resume only shows in dark mode */
-#resume-section {
-    display: none;
-}
-body.dark-theme #resume-section {
-    display: block;
-}
-
-/* VS Code editor only shows in light mode */
-#vscode-editor-section {
-    display: none;
-}
-body:not(.dark-theme) #vscode-editor-section {
-    display: block;
-}
-
-
-/* LIVE VS CODE EDITOR                     */
-/* ========================================== */
 #vscode-editor-section {
     width: 100%;
     max-width: 1000px;
@@ -612,7 +338,6 @@ body:not(.dark-theme) #vscode-editor-section {
     font-family: 'Courier New', Courier, monospace;
 }
 
-/* Mac OS Title Bar */
 #vscode-titlebar {
     background-color: #2d2d2d;
     padding: 12px 16px;
@@ -621,12 +346,7 @@ body:not(.dark-theme) #vscode-editor-section {
     gap: 1rem;
 }
 
-#vscode-traffic-lights {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-
+#vscode-traffic-lights { display: flex; gap: 8px; align-items: center; }
 .traffic-red    { width: 13px; height: 13px; border-radius: 50%; background-color: #ff5f57; display: inline-block; }
 .traffic-yellow { width: 13px; height: 13px; border-radius: 50%; background-color: #ffbd2e; display: inline-block; }
 .traffic-green  { width: 13px; height: 13px; border-radius: 50%; background-color: #28c840; display: inline-block; }
@@ -639,14 +359,8 @@ body:not(.dark-theme) #vscode-editor-section {
     text-align: center;
 }
 
-/* Main split: sidebar + editor */
-#vscode-main {
-    display: flex;
-    height: 500px;
-    background-color: #1e1e1e;
-}
+#vscode-main { display: flex; height: 500px; background-color: #1e1e1e; }
 
-/* File Explorer Sidebar */
 #vscode-sidebar {
     width: 220px;
     background-color: #252526;
@@ -681,26 +395,11 @@ body:not(.dark-theme) #vscode-editor-section {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     transition: background-color 0.15s ease, color 0.15s ease;
 }
+.sidebar-file:hover { background-color: #2a2d2e; color: #ffffff; }
+.sidebar-file.active { background-color: #37373d; color: #ffffff; }
 
-.sidebar-file:hover {
-    background-color: #2a2d2e;
-    color: #ffffff;
-}
+#vscode-editor-area { flex: 1; display: flex; flex-direction: column; min-width: 0; }
 
-.sidebar-file.active {
-    background-color: #37373d;
-    color: #ffffff;
-}
-
-/* Editor Area */
-#vscode-editor-area {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-}
-
-/* Tab Bar */
 #vscode-tabbar {
     background-color: #252526;
     display: flex;
@@ -718,24 +417,11 @@ body:not(.dark-theme) #vscode-editor-section {
     align-items: center;
     gap: 6px;
 }
+.vscode-tab.active { background-color: #1e1e1e; color: #ffffff; border-top: 2px solid #06B6D4; }
 
-.vscode-tab.active {
-    background-color: #1e1e1e;
-    color: #ffffff;
-    border-top: 2px solid #06B6D4;
-}
-
-/* Monaco container fills remaining space */
-#monaco-container {
-    flex: 1;
-    width: 100%;
-}
+#monaco-container { flex: 1; width: 100%; }
 
 @media (max-width: 650px) {
-    #vscode-sidebar {
-        width: 140px;
-    }
-    #vscode-main {
-        height: 400px;
-    }
+    #vscode-sidebar { width: 140px; }
+    #vscode-main { height: 400px; }
 }

@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
 </head>
 <body class="dark-theme">
+
     <!-- INTRO SPLASH SCREEN -->
-<div id="intro-overlay">
-    <div id="intro-content">
-        <span id="intro-word"></span>
-        <span id="intro-name"></span>
+    <div id="intro-overlay">
+        <div id="intro-content">
+            <span id="intro-word"></span>
+            <span id="intro-name"></span>
+        </div>
     </div>
-</div>
+
     <header>
         <nav>
             <h2>Francis Shaba Miyoba</h2>
@@ -117,13 +119,37 @@
                 <a href="mailto:your-email@example.com" class="cta-link">Send an Email</a>
             </div>
         </section>
-
     </div>
 
-<!-- LIVE VS CODE EDITOR — light mode only -->
+    <!-- RESUME SECTION — dark mode only -->
+    <div class="custom-resume-section" id="resume-section">
+        <div class="resume-terminal-header">
+            <div class="resume-prompt">
+                <span class="resume-arrow">&gt;</span> open resume.pdf<span class="resume-cursor">_</span>
+            </div>
+            <h2 class="resume-title">comp</h2>
+        </div>
+
+        <div class="resume-controls-bar">
+            <div class="resume-file-details">
+                <span class="resume-icon-doc">📄</span>
+                <span>pdf</span>
+            </div>
+            <a href="resume.pdf" download="Francis_Shaba_Miyoba_Resume.pdf" class="resume-orange-btn">
+                Download PDF
+            </a>
+        </div>
+
+        <div class="resume-canvas-frame">
+            <iframe src="resume.pdf#toolbar=1&navpanes=0" type="application/pdf" width="100%" height="100%">
+                <p>Your browser doesn't support embedded PDFs. <a href="resume.pdf">Click here to download it directly.</a></p>
+            </iframe>
+        </div>
+    </div>
+
+    <!-- LIVE VS CODE EDITOR — light mode only -->
     <div id="vscode-editor-section">
         <div id="vscode-window">
-            <!-- Mac OS Title Bar -->
             <div id="vscode-titlebar">
                 <div id="vscode-traffic-lights">
                     <span class="traffic-red"></span>
@@ -134,7 +160,6 @@
             </div>
 
             <div id="vscode-main">
-                <!-- File Explorer Sidebar -->
                 <div id="vscode-sidebar">
                     <div class="sidebar-label">EXPLORER</div>
                     <div class="sidebar-folder">AWS-PROJECTS</div>
@@ -144,103 +169,87 @@
                     <div class="sidebar-file" data-file="README.md">📄 README.md</div>
                 </div>
 
-                <!-- Editor Area -->
                 <div id="vscode-editor-area">
-                    <!-- Tab Bar -->
                     <div id="vscode-tabbar">
                         <div class="vscode-tab active" data-file="vpc.tf">📄 vpc.tf</div>
                     </div>
-                    <!-- Monaco mounts here -->
                     <div id="monaco-container"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer>    
-    
+    <footer>
         <p>&copy; 2026 Francis Shaba Miyoba.</p>
     </footer>
 
-   <script>
-    // — Theme Toggle (your original code) —
-    const toggleButton = document.getElementById('theme-toggle');
-    const body = document.body;
-    toggleButton.addEventListener('click', () => {
-        body.classList.toggle('dark-theme');
-    });
+    <script>
+        // — Theme Toggle —
+        const toggleButton = document.getElementById('theme-toggle');
+        const body = document.body;
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('dark-theme');
+            checkAndLoadMonaco();
+        });
 
-    // — Intro Splash Screen —
-    const words = [
-        { text: "Hello",     lang: "English"    },
-        { text: "Hola",      lang: "Spanish"    },
-        { text: "Bonjour",   lang: "French"     },
-        { text: "Ciao",      lang: "Italian"    },
-        { text: "Hallo",     lang: "German"     },
-        { text: "Olá",       lang: "Portuguese" },
-        { text: "مرحبا",     lang: "Arabic"     },
-        { text: "こんにちは", lang: "Japanese"   },
-        { text: "안녕하세요", lang: "Korean"     },
-        { text: "Jambo",     lang: "Swahili"    },
-    ];
+        // — Intro Splash Screen —
+        const words = [
+            { text: "Hello",      lang: "English"    },
+            { text: "Hola",       lang: "Spanish"    },
+            { text: "Bonjour",    lang: "French"     },
+            { text: "Ciao",       lang: "Italian"    },
+            { text: "Hallo",      lang: "German"     },
+            { text: "Olá",        lang: "Portuguese" },
+            { text: "مرحبا",      lang: "Arabic"     },
+            { text: "こんにちは",  lang: "Japanese"   },
+            { text: "안녕하세요",  lang: "Korean"     },
+            { text: "Jambo",      lang: "Swahili"    },
+        ];
 
-    const overlay   = document.getElementById('intro-overlay');
-    const wordEl    = document.getElementById('intro-word');
-    const nameEl    = document.getElementById('intro-name');
-    const fullName  = "Francis Shaba Miyoba";
+        const overlay  = document.getElementById('intro-overlay');
+        const wordEl   = document.getElementById('intro-word');
+        const nameEl   = document.getElementById('intro-name');
+        const fullName = "Francis Shaba Miyoba";
 
-    let currentIndex = 0;
+        let currentIndex = 0;
 
-    // Fades a word in, waits, then fades it out, then moves to next
-    function showNextWord() {
-        if (currentIndex >= words.length) {
-            // All words done — start typing the name
-            wordEl.classList.add('hidden');
-            setTimeout(startTypewriter, 400);
-            return;
-        }
-
-        const word = words[currentIndex];
-        wordEl.textContent = word.text;
-        wordEl.classList.remove('hidden');
-
-        // Hold the word visible for 500ms then fade it out
-        setTimeout(() => {
-            wordEl.classList.add('hidden');
-            currentIndex++;
-            // Wait for fade-out to finish then show next word
-            setTimeout(showNextWord, 350);
-        }, 500);
-    }
-
-    // Types your name one character at a time
-    function startTypewriter() {
-        let i = 0;
-        const speed = 80; // ms per character — increase to slow down
-
-        function typeChar() {
-            if (i < fullName.length) {
-                nameEl.textContent += fullName.charAt(i);
-                i++;
-                setTimeout(typeChar, speed);
-            } else {
-                // Name fully typed — wait then close the overlay
-                setTimeout(closeOverlay, 1200);
+        function showNextWord() {
+            if (currentIndex >= words.length) {
+                wordEl.classList.add('hidden');
+                setTimeout(startTypewriter, 400);
+                return;
             }
+            const word = words[currentIndex];
+            wordEl.textContent = word.text;
+            wordEl.classList.remove('hidden');
+            setTimeout(() => {
+                wordEl.classList.add('hidden');
+                currentIndex++;
+                setTimeout(showNextWord, 350);
+            }, 500);
         }
 
-        typeChar();
-    }
+        function startTypewriter() {
+            let i = 0;
+            const speed = 80;
+            function typeChar() {
+                if (i < fullName.length) {
+                    nameEl.textContent += fullName.charAt(i);
+                    i++;
+                    setTimeout(typeChar, speed);
+                } else {
+                    setTimeout(closeOverlay, 1200);
+                }
+            }
+            typeChar();
+        }
 
-    // Fades out and removes the overlay
-    function closeOverlay() {
-        overlay.classList.add('fade-out');
-        // Wait for CSS fade transition to finish then remove from DOM
-        setTimeout(() => {
-            overlay.remove();
-        }, 800);
-    }
-
+        function closeOverlay() {
+            overlay.classList.add('fade-out');
+            setTimeout(() => {
+                overlay.remove();
+            }, 800);
+        }
 
         // — Rotating Word —
         const rotatingWords = ["Secure", "Resilient", "Compliant"];
@@ -249,115 +258,136 @@
 
         function rotateWord() {
             rotatingEl.classList.add('slide-out');
-
             setTimeout(() => {
                 wordIndex = (wordIndex + 1) % rotatingWords.length;
                 rotatingEl.textContent = rotatingWords[wordIndex];
-
                 rotatingEl.classList.remove('slide-out');
                 rotatingEl.classList.add('slide-in-from-below');
-
                 rotatingEl.getBoundingClientRect();
-
                 rotatingEl.classList.remove('slide-in-from-below');
             }, 500);
         }
 
         setInterval(rotateWord, 2500);
 
-<!-- RESUME SECTION — dark mode only -->
-        <div class="custom-resume-section" id="resume-section">
-            <div class="resume-terminal-header">
-                <div class="resume-prompt">
-                    <span class="resume-arrow">&gt;</span> open resume.pdf<span class="resume-cursor">_</span>
-                </div>
-                <h2 class="resume-title">comp</h2>
-            </div>
+        // — Live VS Code Editor (Monaco) —
+        const placeholderFiles = {
+            "vpc.tf": `resource "aws_vpc" "main" {
+  cidr_block           = "10.0.0.0/16"
+  enable_dns_support   = true
+  enable_dns_hostnames = true
 
-            <div class="resume-controls-bar">
-                <div class="resume-file-details">
-                    <span class="resume-icon-doc">📄</span>
-                    <span>pdf</span>
-                </div>
-                <a href="resume.pdf" download="Francis_Shaba_Miyoba_Resume.pdf" class="resume-orange-btn">
-                     Download PDF
-                </a>
-            </div>
+  tags = {
+    Name = "main-vpc"
+  }
+}
 
-            <div class="resume-canvas-frame">
-                <iframe src="resume.pdf#toolbar=1&navpanes=0" type="application/pdf" width="100%" height="100%">
-                    <p>Your browser doesn't support embedded PDFs. <a href="resume.pdf">Click here to download it directly.</a></p>
-                </iframe>
-            </div>
-        </div>
-// — VS Code GitHub Terminal —
-        const terminalOutput = document.getElementById('terminal-output');
+resource "aws_subnet" "public" {
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "10.0.1.0/24"
+  availability_zone = "us-east-1a"
 
-        async function fetchCommits() {
-            terminalOutput.innerHTML = '';
+  tags = {
+    Name = "public-subnet"
+  }
+}`,
+            "lambda_handler.py": `import json
+import boto3
 
-            // Print the initial prompt line
-            await printLine('terminal-prompt', '$ git log --oneline Francis-17-cyber/AWS-Projects');
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('MovieCatalog')
 
-            try {
-                const response = await fetch('https://api.github.com/repos/Francis-17-cyber/AWS-Projects/commits?per_page=10');
-                const commits = await response.json();
+def lambda_handler(event, context):
+    response = table.scan()
+    items = response.get('Items', [])
 
-                if (!Array.isArray(commits)) {
-                    await printLine('commit-message', '⚠ Could not load commits. Check repo is public.');
-                    return;
+    return {
+        'statusCode': 200,
+        'body': json.dumps(items)
+    }`,
+            "deploy.yml": `name: Deploy to AWS
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-region: us-east-1
+      - name: Deploy
+        run: aws s3 sync ./build s3://my-bucket`,
+            "README.md": `# AWS Projects
+
+A collection of cloud architecture projects covering
+VPC design, serverless deployments, and CI/CD pipelines.
+
+## Stack
+- Terraform
+- AWS Lambda
+- GitHub Actions`
+        };
+
+        const fileLanguages = {
+            "vpc.tf": "hcl",
+            "lambda_handler.py": "python",
+            "deploy.yml": "yaml",
+            "README.md": "markdown"
+        };
+
+        let monacoEditor = null;
+        let monacoLoaded = false;
+
+        function initMonaco() {
+            if (monacoLoaded) return;
+            monacoLoaded = true;
+
+            require.config({ paths: { vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs' } });
+            require(['vs/editor/editor.main'], function () {
+                monacoEditor = monaco.editor.create(document.getElementById('monaco-container'), {
+                    value: placeholderFiles["vpc.tf"],
+                    language: fileLanguages["vpc.tf"],
+                    theme: 'vs-dark',
+                    fontSize: 13,
+                    minimap: { enabled: false },
+                    automaticLayout: true,
+                    scrollBeyondLastLine: false
+                });
+            });
+        }
+
+        document.querySelectorAll('.sidebar-file').forEach(fileEl => {
+            fileEl.addEventListener('click', () => {
+                const fileName = fileEl.getAttribute('data-file');
+
+                document.querySelectorAll('.sidebar-file').forEach(f => f.classList.remove('active'));
+                fileEl.classList.add('active');
+
+                const tabBar = document.getElementById('vscode-tabbar');
+                tabBar.innerHTML = `<div class="vscode-tab active" data-file="${fileName}">📄 ${fileName}</div>`;
+
+                if (monacoEditor) {
+                    monacoEditor.setValue(placeholderFiles[fileName]);
+                    monaco.editor.setModelLanguage(monacoEditor.getModel(), fileLanguages[fileName]);
                 }
+            });
+        });
 
-                for (const commit of commits) {
-                    const hash    = commit.sha.substring(0, 7);
-                    const author  = commit.commit.author.name;
-                    const date    = new Date(commit.commit.author.date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-                    const message = commit.commit.message.split('\n')[0];
-
-                    await printCommit(hash, author, date, message);
-                    await sleep(300);
-                }
-
-                await printLine('terminal-prompt', '$ ▋');
-
-            } catch (err) {
-                await printLine('commit-message', '⚠ Network error. Could not reach GitHub API.');
+        function checkAndLoadMonaco() {
+            if (!document.body.classList.contains('dark-theme')) {
+                initMonaco();
             }
         }
 
-        function printLine(className, text) {
-            return new Promise(resolve => {
-                const line = document.createElement('div');
-                line.classList.add('commit-line', className);
-                line.textContent = text;
-                terminalOutput.appendChild(line);
-                setTimeout(resolve, 150);
-            });
-        }
+        // — Kick everything off —
+        showNextWord();
+        checkAndLoadMonaco();
+    </script>
 
-        function printCommit(hash, author, date, message) {
-            return new Promise(resolve => {
-                const line = document.createElement('div');
-                line.classList.add('commit-line');
-                line.innerHTML = `
-                    <span class="commit-hash">${hash}</span>
-                    <span class="commit-author"> ${author}</span>
-                    <span class="commit-date"> (${date})</span>
-                    <span class="commit-message"> — ${message}</span>
-                `;
-                terminalOutput.appendChild(line);
-                setTimeout(resolve, 150);
-            });
-        }
-
-        function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
-
-        // Fetch commits on load
-        fetchCommits();
-    // Kick everything off
-    showNextWord();
-</script>
 </body>
 </html>
