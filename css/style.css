@@ -659,6 +659,11 @@ BOTTOM PANEL
 }
 
 .terminal-cursor{
+    #terminal-text{
+
+    color:#d4d4d4;
+
+}
 
     display:inline-block;
 

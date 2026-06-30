@@ -259,4 +259,88 @@ document.querySelectorAll(".sidebar-file").forEach(file => {
 
     });
 
-});        
+});   
+/* =====================================
+   TERMINAL DEMO
+===================================== */
+
+const terminal = document.getElementById("terminal-text");
+
+const terminalCommands = [
+
+`terraform init
+
+Initializing the backend...
+
+Initializing provider plugins...
+
+Terraform has been successfully initialized!`,
+
+`terraform apply
+
+aws_vpc.main: Creating...
+
+aws_subnet.public: Creating...
+
+aws_security_group.web: Creating...
+
+Apply complete!
+
+Resources: 3 added.`,
+
+`git status
+
+On branch main
+
+nothing to commit,
+
+working tree clean`,
+
+`aws ec2 describe-instances
+
+InstanceId: i-08f2ac9139f
+
+State: running
+
+Public IP: 3.145.xxx.xxx`
+
+];
+
+let terminalIndex = 0;
+
+function typeTerminal(text){
+
+    terminal.textContent="";
+
+    let i=0;
+
+    const timer=setInterval(()=>{
+
+        terminal.textContent+=text.charAt(i);
+
+        i++;
+
+        if(i>=text.length){
+
+            clearInterval(timer);
+        }
+
+    },15);
+
+}
+
+typeTerminal(terminalCommands[0]);
+
+setInterval(()=>{
+
+    terminalIndex++;
+
+    if(terminalIndex>=terminalCommands.length){
+
+        terminalIndex=0;
+
+    }
+
+    typeTerminal(terminalCommands[terminalIndex]);
+
+},8000);     
