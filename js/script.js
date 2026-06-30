@@ -175,22 +175,41 @@ VPC design, serverless deployments, and CI/CD pipelines.
             });
         }
 
-        document.querySelectorAll('.sidebar-file').forEach(fileEl => {
-            fileEl.addEventListener('click', () => {
-                const fileName = fileEl.getAttribute('data-file');
+/* ===========================
+      VS CODE TAB SYSTEM
+=========================== */
 
-                document.querySelectorAll('.sidebar-file').forEach(f => f.classList.remove('active'));
-                fileEl.classList.add('active');
+const openTabs = ["vpc.tf"];
+let activeFile = "vpc.tf";
 
-                const tabBar = document.getElementById('vscode-tabbar');
-                tabBar.innerHTML = `<div class="vscode-tab active" data-file="${fileName}">📄 ${fileName}</div>`;
+function renderTabs() {
 
-                if (monacoEditor) {
-                    monacoEditor.setValue(placeholderFiles[fileName]);
-                    monaco.editor.setModelLanguage(monacoEditor.getModel(), fileLanguages[fileName]);
-                }
-            });
-        });
+    const tabbar = document.getElementById("vscode-tabbar");
+
+    tabbar.innerHTML = "";
+
+    openTabs.forEach(file => {
+
+        const tab = document.createElement("div");
+
+        tab.className = file === activeFile
+            ? "vscode-tab active"
+            : "vscode-tab";
+
+        tab.dataset.file = file;
+
+        tab.innerHTML = `
+            <span>${file}</span>
+            <i class="codicon codicon-close tab-close"></i>
+        `;
+
+        tabbar.appendChild(tab);
+
+    });
+
+}
+
+renderTabs();
 
         function checkAndLoadMonaco() {
             if (!document.body.classList.contains('dark-theme')) {
@@ -201,3 +220,43 @@ VPC design, serverless deployments, and CI/CD pipelines.
         // — Kick everything off —
         showNextWord();
         checkAndLoadMonaco();
+document.querySelectorAll(".sidebar-file").forEach(file => {
+
+    file.addEventListener("click", () => {
+
+        const fileName = file.dataset.file;
+
+        activeFile = fileName;
+
+        if (!openTabs.includes(fileName)) {
+
+            openTabs.push(fileName);
+
+        }
+
+        renderTabs();
+
+        document.querySelectorAll(".sidebar-file")
+            .forEach(f => f.classList.remove("active"));
+
+        file.classList.add("active");
+
+        if (monacoEditor) {
+
+            monacoEditor.setValue(
+                placeholderFiles[fileName]
+            );
+
+            monaco.editor.setModelLanguage(
+
+                monacoEditor.getModel(),
+
+                fileLanguages[fileName]
+
+            );
+
+        }
+
+    });
+
+});        

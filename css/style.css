@@ -602,3 +602,52 @@ body:not(.dark-theme) #vscode-editor-section{
     font:12px "Segoe UI";
 
 }
+.vscode-tab{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:0 14px;
+
+    height:35px;
+
+    color:#9d9d9d;
+
+    cursor:pointer;
+
+    font:13px "Segoe UI";
+
+    border-right:1px solid #2d2d2d;
+
+    background:#2d2d2d;
+
+}
+
+.vscode-tab.active{
+
+    background:#1e1e1e;
+
+    color:white;
+
+    border-top:2px solid #007acc;
+
+}
+
+.tab-close{
+
+    margin-left:auto;
+
+    opacity:0;
+
+    transition:.2s;
+
+}
+
+.vscode-tab:hover .tab-close{
+
+    opacity:1;
+
+}
