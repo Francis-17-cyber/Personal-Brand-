@@ -220,7 +220,7 @@ folder.innerHTML = `
 tree.appendChild(folder);
 
         }
-        
+
         // Files
         section.files.forEach(file => {
 
@@ -288,108 +288,28 @@ tree.appendChild(item);
 =========================== */
 
 const openTabs = ["vpc.tf"];
-let activeFile = "vpc.tf";
+let activeTab = "vpc.tf";
 
 function renderTabs() {
 
-    const tabbar = document.getElementById("vscode-tabbar");
+    const tabBar = document.getElementById("tab-bar");
 
-    tabbar.innerHTML = "";
+    tabBar.innerHTML = "";
 
     openTabs.forEach(file => {
 
         const tab = document.createElement("div");
 
         tab.className =
-            file === activeFile
-            ? "vscode-tab active"
-            : "vscode-tab";
-
-        tab.dataset.file = file;
+            file === activeTab
+                ? "editor-tab active"
+                : "editor-tab";
 
         tab.innerHTML = `
             <span>${file}</span>
-            <i class="codicon codicon-close tab-close"></i>
         `;
 
-        /* Click tab */
-
-        tab.addEventListener("click", (e) => {
-
-            if(e.target.classList.contains("tab-close")) return;
-
-            activeFile = file;
-
-            renderTabs();
-
-            document.querySelectorAll(".sidebar-file")
-                .forEach(f=>{
-
-                    f.classList.toggle(
-                        "active",
-                        f.dataset.file===file
-                    );
-
-                });
-
-            monacoEditor.setValue(
-                placeholderFiles[file]
-            );
-
-            monaco.editor.setModelLanguage(
-
-                monacoEditor.getModel(),
-
-                fileLanguages[file]
-
-            );
-
-        });
-
-        /* Close */
-
-        tab.querySelector(".tab-close")
-        .addEventListener("click",(e)=>{
-
-            e.stopPropagation();
-
-            const index=openTabs.indexOf(file);
-
-            if(index>-1){
-
-                openTabs.splice(index,1);
-
-            }
-
-            if(activeFile===file){
-
-                activeFile=openTabs[0] || "";
-
-            }
-
-            if(activeFile){
-
-                monacoEditor.setValue(
-
-                    placeholderFiles[activeFile]
-
-                );
-
-                monaco.editor.setModelLanguage(
-
-                    monacoEditor.getModel(),
-
-                    fileLanguages[activeFile]
-
-                );
-
-            }
-
-            renderTabs();
-
-        });
-
-        tabbar.appendChild(tab);
+        tabBar.appendChild(tab);
 
     });
 
