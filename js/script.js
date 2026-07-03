@@ -199,29 +199,60 @@ VPC design, serverless deployments, and CI/CD pipelines.
 function buildExplorer() {
 
     const tree = document.getElementById("file-tree");
-
     tree.innerHTML = "";
 
     explorerTree.forEach(section => {
 
+        // -----------------------
         // Folder
+        // -----------------------
+
+        let fileContainer = null;
+
         if (section.folder !== "") {
 
-const folder = document.createElement("div");
+            const folder = document.createElement("div");
+            folder.className = "explorer-folder";
 
-folder.className = "explorer-folder";
+            folder.innerHTML = `
+                <i class="codicon codicon-chevron-down folder-arrow"></i>
+                <i class="codicon codicon-folder folder-icon"></i>
+                <span>${section.folder}</span>
+            `;
 
-folder.innerHTML = `
-    <i class="codicon codicon-chevron-down folder-arrow"></i>
-    <i class="codicon codicon-folder folder-icon"></i>
-    <span>${section.folder}</span>
-`;
+            tree.appendChild(folder);
 
-tree.appendChild(folder);
+            fileContainer = document.createElement("div");
+            fileContainer.className = "folder-files";
+
+            tree.appendChild(fileContainer);
+
+            folder.addEventListener("click", () => {
+
+                const arrow = folder.querySelector(".folder-arrow");
+
+                fileContainer.classList.toggle("collapsed");
+
+                if (fileContainer.classList.contains("collapsed")) {
+
+                    arrow.classList.remove("codicon-chevron-down");
+                    arrow.classList.add("codicon-chevron-right");
+
+                } else {
+
+                    arrow.classList.remove("codicon-chevron-right");
+                    arrow.classList.add("codicon-chevron-down");
+
+                }
+
+            });
 
         }
 
+        // -----------------------
         // Files
+        // -----------------------
+
         section.files.forEach(file => {
 
             const item = document.createElement("div");
@@ -229,33 +260,41 @@ tree.appendChild(folder);
             item.className = "explorer-file";
 
             let icon = "codicon-file-code";
-let iconClass = "";
+            let iconClass = "";
 
-if(file.endsWith(".tf")){
-    icon = "codicon-symbol-module";
-    iconClass = "terraform-icon";
-}
-else if(file.endsWith(".py")){
-    icon = "codicon-symbol-method";
-    iconClass = "python-icon";
-}
-else if(file.endsWith(".yml")){
-    icon = "codicon-settings-gear";
-    iconClass = "yaml-icon";
-}
-else if(file.endsWith(".md")){
-    icon = "codicon-book";
-    iconClass = "markdown-icon";
-}
+            if (file.endsWith(".tf")) {
+                icon = "codicon-symbol-module";
+                iconClass = "terraform-icon";
+            }
+            else if (file.endsWith(".py")) {
+                icon = "codicon-symbol-method";
+                iconClass = "python-icon";
+            }
+            else if (file.endsWith(".yml")) {
+                icon = "codicon-settings-gear";
+                iconClass = "yaml-icon";
+            }
+            else if (file.endsWith(".md")) {
+                icon = "codicon-book";
+                iconClass = "markdown-icon";
+            }
 
-item.innerHTML = `
-    <i class="codicon ${icon} ${iconClass}"></i>
-    <span>${file}</span>
-`;
+            item.innerHTML = `
+                <i class="codicon ${icon} ${iconClass}"></i>
+                <span>${file}</span>
+            `;
 
             item.style.paddingLeft = "32px";
 
-tree.appendChild(item);
+            if (fileContainer) {
+
+                fileContainer.appendChild(item);
+
+            } else {
+
+                tree.appendChild(item);
+
+            }
 
         });
 
