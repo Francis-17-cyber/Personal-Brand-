@@ -147,12 +147,89 @@ VPC design, serverless deployments, and CI/CD pipelines.
 - GitHub Actions`
         };
 
+        // Fill in content for the rest of the files shown in the explorer
+        placeholderFiles["subnets.tf"] = `resource "aws_subnet" "private" {
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "10.0.2.0/24"
+  availability_zone = "us-east-1b"
+
+  tags = {
+    Name = "private-subnet"
+  }
+}
+
+resource "aws_subnet" "public_b" {
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = "10.0.3.0/24"
+  availability_zone       = "us-east-1b"
+  map_public_ip_on_launch = true
+
+  tags = {
+    Name = "public-subnet-b"
+  }
+}`;
+
+        placeholderFiles["security-groups.tf"] = `resource "aws_security_group" "web" {
+  name        = "web-sg"
+  description = "Allow HTTP/HTTPS inbound traffic"
+  vpc_id      = aws_vpc.main.id
+
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}`;
+
+        placeholderFiles["ec2.tf"] = `resource "aws_instance" "app_server" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t3.micro"
+  subnet_id     = aws_subnet.public.id
+
+  vpc_security_group_ids = [aws_security_group.web.id]
+
+  tags = {
+    Name = "app-server"
+  }
+}`;
+
+        placeholderFiles["autoscaling.tf"] = `resource "aws_autoscaling_group" "app" {
+  desired_capacity    = 2
+  max_size            = 4
+  min_size            = 1
+  vpc_zone_identifier = [aws_subnet.public.id]
+
+  launch_template {
+    id      = aws_launch_template.app.id
+    version = "$Latest"
+  }
+}`;
+
         const fileLanguages = {
 
             "vpc.tf": "hcl",
+            "subnets.tf": "hcl",
+            "security-groups.tf": "hcl",
+            "ec2.tf": "hcl",
+            "autoscaling.tf": "hcl",
             "lambda_handler.py": "python",
             "deploy.yml": "yaml",
             "README.md": "markdown"
+        };
+
+        const languageDisplayNames = {
+            "hcl": "Terraform",
+            "python": "Python",
+            "yaml": "YAML",
+            "markdown": "Markdown"
         };
 
        const explorerTree = [
@@ -285,6 +362,9 @@ function buildExplorer() {
             `;
 
             item.style.paddingLeft = "32px";
+            item.dataset.filename = file;
+
+            item.addEventListener("click", () => openFile(file));
 
             if (fileContainer) {
 
@@ -300,6 +380,66 @@ function buildExplorer() {
 
     });
 
+    setActiveExplorerItem(activeTab);
+
+}
+
+/* ===========================
+      OPEN / SWITCH FILES
+=========================== */
+
+let pendingFile = null;
+
+function setActiveExplorerItem(filename) {
+    document.querySelectorAll(".explorer-file").forEach(el => {
+        el.classList.toggle("active", el.dataset.filename === filename);
+    });
+}
+
+function updateBreadcrumbs(filename) {
+    const breadcrumbs = document.getElementById("breadcrumbs");
+    if (!breadcrumbs) return;
+
+    let folderName = "";
+    explorerTree.forEach(section => {
+        if (section.files.includes(filename)) {
+            folderName = section.folder;
+        }
+    });
+
+    breadcrumbs.textContent = folderName ? `${folderName} / ${filename}` : filename;
+}
+
+function updateStatusBarLanguage(filename) {
+    const statusBar = document.getElementById("status-bar");
+    if (!statusBar) return;
+    const langEl = statusBar.querySelector("div:first-child");
+    if (!langEl) return;
+    const lang = fileLanguages[filename];
+    langEl.textContent = languageDisplayNames[lang] || "Plain Text";
+}
+
+function openFile(filename) {
+    if (!placeholderFiles[filename]) return;
+
+    if (!openTabs.includes(filename)) {
+        openTabs.push(filename);
+    }
+    activeTab = filename;
+
+    renderTabs();
+    setActiveExplorerItem(filename);
+    updateBreadcrumbs(filename);
+    updateStatusBarLanguage(filename);
+
+    if (monacoEditor) {
+        const model = monacoEditor.getModel();
+        monaco.editor.setModelLanguage(model, fileLanguages[filename] || "plaintext");
+        monacoEditor.setValue(placeholderFiles[filename]);
+    } else {
+        pendingFile = filename;
+        checkAndLoadMonaco();
+    }
 }
         let monacoEditor = null;
         let monacoLoaded = false;
@@ -310,16 +450,38 @@ function buildExplorer() {
 
             require.config({ paths: { vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs' } });
             require(['vs/editor/editor.main'], function () {
+                const startFile = pendingFile || activeTab || "vpc.tf";
+
                 monacoEditor = monaco.editor.create(document.getElementById('monaco-container'), {
-                    value: placeholderFiles["vpc.tf"],
-                    language: fileLanguages["vpc.tf"],
+                    value: placeholderFiles[startFile],
+                    language: fileLanguages[startFile],
                     theme: 'vs-dark',
                     fontSize: 13,
                     minimap: { enabled: false },
                     automaticLayout: true,
                     scrollBeyondLastLine: false
                 });
+
+                activeTab = startFile;
+                pendingFile = null;
+                renderTabs();
+                setActiveExplorerItem(startFile);
+                updateBreadcrumbs(startFile);
+                updateStatusBarLanguage(startFile);
             });
+        }
+
+        // The VS Code panel only exists in light mode. Lazy-load Monaco
+        // the first time it becomes visible (initial load, or after a
+        // theme toggle), instead of loading it up front.
+        function checkAndLoadMonaco() {
+            const vscodeSection = document.getElementById('vscode-editor-section');
+            if (!vscodeSection) return;
+
+            const isVisible = window.getComputedStyle(vscodeSection).display !== 'none';
+            if (isVisible && !monacoLoaded) {
+                initMonaco();
+            }
         }
 
 /* ===========================
@@ -347,6 +509,8 @@ function renderTabs() {
         tab.innerHTML = `
             <span>${file}</span>
         `;
+
+        tab.addEventListener("click", () => openFile(file));
 
         tabBar.appendChild(tab);
 
