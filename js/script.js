@@ -23,7 +23,7 @@
         const overlay  = document.getElementById('intro-overlay');
         const wordEl   = document.getElementById('intro-word');
         const nameEl   = document.getElementById('intro-name');
-        const fullName = "Francis SHABA Miyoba - cloud is amazing architect"
+        const fullName = "Francis SHABA Miyoba -"
 
         let currentIndex = 0;
 
