@@ -23,7 +23,7 @@
         const overlay  = document.getElementById('intro-overlay');
         const wordEl   = document.getElementById('intro-word');
         const nameEl   = document.getElementById('intro-name');
-        const fullName = "Francis SHABA Miyoba how is it fromt he other side-"
+        const fullName = "Francis SHABA Miyoba how is it from all this-"
 
         let currentIndex = 0;
 
